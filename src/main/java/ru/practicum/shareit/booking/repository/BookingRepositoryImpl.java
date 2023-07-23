@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookingRepositoryImpl implements BookingRepository {
-    final public Map<Long, Booking> bookingMap = new HashMap<>();
+    public final Map<Long, Booking> bookingMap = new HashMap<>();
 
     /**
      * Получить список всех бронирований.
