@@ -216,14 +216,14 @@ public class ValidationService {
      * <p>пятый - isRequest, шестой - отзывы.</p>
      */
     public boolean[] checkFieldsForUpdate(Item item) {
-        boolean[] result;
-        result = new boolean[3];
-        result[0] = (item.getName() != null) && !item.getName().isBlank();
-        result[1] = (item.getDescription() != null) && !item.getDescription().isBlank();
-        result[2] = item.getAvailable() != null;
+        boolean[] checkResult;
+        checkResult = new boolean[3];
+        checkResult[0] = (item.getName() != null) && !item.getName().isBlank();
+        checkResult[1] = (item.getDescription() != null) && !item.getDescription().isBlank();
+        checkResult[2] = item.getAvailable() != null;
 
-        for (boolean b : result) {
-            if (b) return result;
+        for (boolean b : checkResult) {
+            if (b) return checkResult;
         }
         throw new ValidateException("Все поля: название, описание и статус доступа к аренде равны 'null'.");
     }
