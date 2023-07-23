@@ -13,7 +13,6 @@ import ru.practicum.shareit.exception.ValidateException;
 
 @RestControllerAdvice
 @Slf4j
-@Getter
 public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
