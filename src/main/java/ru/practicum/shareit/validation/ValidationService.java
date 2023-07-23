@@ -225,7 +225,9 @@ public class ValidationService {
         checkResult[0] = nameNotValid;
         checkResult[1] = descriptionNotValid;
         checkResult[2] = availableNotValid;
-        if (nameNotValid && descriptionNotValid && availableNotValid) return checkResult;
+        for (boolean eachCheck : checkResult) {
+            if (eachCheck) return checkResult;
+        }
         throw new ValidateException("Все поля: название, описание и статус доступа к аренде равны 'null'.");
     }
 
