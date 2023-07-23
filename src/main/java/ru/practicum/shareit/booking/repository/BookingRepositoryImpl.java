@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookingRepositoryImpl implements BookingRepository {
-    final Map<Long, Booking> bookingMap = new HashMap<>();
+    final public Map<Long, Booking> bookingMap = new HashMap<>();
 
     /**
      * Получить список всех бронирований.
@@ -38,7 +38,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public List<Booking> getBookingsByUserId(Long userId) {
 
-        return bookingMap.values().stream().filter(b -> b.getUserId().equals(userId))
+        return bookingMap.values().stream().filter(b -> b.getBooker().getId().equals(userId))
                 .collect(Collectors.toList());
     }
 
@@ -48,7 +48,7 @@ public class BookingRepositoryImpl implements BookingRepository {
      */
     @Override
     public void removeBookingsByUserId(Long userId) {
-        List<Long> idForRemove = bookingMap.values().stream().filter(b -> b.getUserId().equals(userId))
+        List<Long> idForRemove = bookingMap.values().stream().filter(b -> b.getBooker().getId().equals(userId))
                 .map(Booking::getId).collect(Collectors.toList());
     }
 }
