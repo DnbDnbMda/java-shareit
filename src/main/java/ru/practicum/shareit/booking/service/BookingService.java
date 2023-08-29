@@ -4,12 +4,12 @@ package ru.practicum.shareit.booking.service;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingForResponse;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingService {
     /**
      * Создание брони в БД.
+     *
      * @param bookerId   пользователь, пытающийся забронировать вещь.
      * @param bookingDto создаваемая бронь.
      * @return бронь из БД.
@@ -18,6 +18,7 @@ public interface BookingService {
 
     /**
      * Обновить бронь в БД.
+     *
      * @param ownerId   хозяин вещи.
      * @param bookingId ID брони.
      * @param approved  True - подтверждение со стороны хозяина вещи, False - наоборот.
@@ -43,12 +44,13 @@ public interface BookingService {
 
     /**
      * • Получение списка бронирований для всех вещей текущего пользователя.
+     *
      * @param userId ID хозяина вещей.
      * @param state  Параметр state необязательный и по умолчанию равен ALL (англ. «все»).
      *               Также он может принимать значения CURRENT (англ. «текущие»), PAST (англ. «завершённые»),
      *               FUTURE (англ. «будущие»), WAITING (англ. «ожидающие подтверждения»), REJECTED (англ. «отклонённые»).
      * @return Бронирования должны возвращаться отсортированными по дате от более новых к более старым.
      */
-    List<BookingForResponse> getByOwnerId(Long userId, String state, LocalDateTime nowTime);
+    List<BookingForResponse> getByOwnerId(Long userId, String state);
 }
 

@@ -91,6 +91,6 @@ public class BookingController {
                                                          required = false) String state) {
         log.info("Получение списка бронирований для всех вещей текущего пользователя.");
         LocalDateTime nowTime = LocalDateTime.now();
-        return bookingService.getByOwnerId(userId, state, nowTime);
+        return bookingService.getByOwnerId(userId, state);
     }
 }

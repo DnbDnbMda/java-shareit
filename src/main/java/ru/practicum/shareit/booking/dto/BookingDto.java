@@ -3,6 +3,7 @@ package ru.practicum.shareit.booking.dto;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import ru.practicum.shareit.booking.model.BookingStatus;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @ToString
 
 public class BookingDto {
@@ -30,16 +31,4 @@ public class BookingDto {
     private LocalDateTime endTime;    //Дата окончания бронирования.
     @JsonProperty("status")
     private BookingStatus bookingStatus;//Статус бронирования (в ожидании, подтверждён, отменён, )
-
-    private LocalDateTime nowTime;
-
-    public BookingDto(Long id, Long itemId, UserForResponseDto booker, LocalDateTime startTime, LocalDateTime endTime, BookingStatus bookingStatus, LocalDateTime nowTime) {
-        this.id = id;
-        this.itemId = itemId;
-        this.booker = booker;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.bookingStatus = bookingStatus;
-        this.nowTime = LocalDateTime.now();
-    }
 }
