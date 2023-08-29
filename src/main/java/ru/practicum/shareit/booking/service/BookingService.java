@@ -4,6 +4,7 @@ package ru.practicum.shareit.booking.service;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingForResponse;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingService {
@@ -48,6 +49,6 @@ public interface BookingService {
      *               FUTURE (англ. «будущие»), WAITING (англ. «ожидающие подтверждения»), REJECTED (англ. «отклонённые»).
      * @return Бронирования должны возвращаться отсортированными по дате от более новых к более старым.
      */
-    List<BookingForResponse> getByOwnerId(Long userId, String state);
+    List<BookingForResponse> getByOwnerId(Long userId, String state, LocalDateTime nowTime);
 }
 

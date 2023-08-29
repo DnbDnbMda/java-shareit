@@ -8,6 +8,7 @@ import ru.practicum.shareit.booking.dto.BookingForResponse;
 import ru.practicum.shareit.booking.service.BookingService;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -89,6 +90,7 @@ public class BookingController {
                                                  @RequestParam(value = "state", defaultValue = "ALL",
                                                          required = false) String state) {
         log.info("Получение списка бронирований для всех вещей текущего пользователя.");
-        return bookingService.getByOwnerId(userId, state);
+        LocalDateTime nowTime = LocalDateTime.now();
+        return bookingService.getByOwnerId(userId, state, nowTime);
     }
 }

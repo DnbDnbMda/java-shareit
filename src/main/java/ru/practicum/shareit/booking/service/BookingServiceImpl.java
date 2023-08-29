@@ -206,8 +206,8 @@ public class BookingServiceImpl implements BookingService {
      * @return Бронирования должны возвращаться отсортированными по дате от более новых к более старым.
      */
     @Override
-    public List<BookingForResponse> getByOwnerId(Long userId, String state) {
-        final LocalDateTime nowDateTime = LocalDateTime.now();
+    public List<BookingForResponse> getByOwnerId(Long userId, String state, LocalDateTime nowTime) {
+        final LocalDateTime nowDateTime = nowTime;//LocalDateTime.now();
         BookingState bookingState;
 
         try {
