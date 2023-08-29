@@ -3,7 +3,6 @@ package ru.practicum.shareit.booking.dto;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import ru.practicum.shareit.booking.model.BookingStatus;
