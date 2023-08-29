@@ -1,6 +1,6 @@
 package ru.practicum.shareit.booking.repository;
 
-import ru.practicum.shareit.booking.Booking;
+import ru.practicum.shareit.booking.model.Booking;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BookingRepositoryImpl implements BookingRepository {
-    public final Map<Long, Booking> bookingMap = new HashMap<>();
+public class BookingRepositoryInMemoryImpl implements BookingRepositoryInMemory {
+    final Map<Long, Booking> bookingMap = new HashMap<>();
 
     /**
      * Получить список всех бронирований.
