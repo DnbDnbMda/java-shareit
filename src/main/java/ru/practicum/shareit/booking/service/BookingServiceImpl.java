@@ -266,7 +266,7 @@ public class BookingServiceImpl implements BookingService {
      */
     private void validateBooking(BookingDto bookingDto, Item item, User booker) {
 
-        if (bookingDto.getStartTime()==null || bookingDto.getEndTime()==null) {
+        if ((bookingDto.getStartTime()==null)||(bookingDto.getEndTime()==null)) {
             String message = "Не указаны начало или окончание бронирования";
             log.info(message);
             throw new ValidateException(message);
