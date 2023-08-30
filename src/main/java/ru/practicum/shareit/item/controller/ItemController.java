@@ -24,12 +24,20 @@ public class ItemController {
     @GetMapping("/{itemId}")
     public ItemWithBookingAndCommentsDto getItemByIdForOwner(@RequestHeader(value = "X-Sharer-User-Id") Long ownerId,
                                                              @PathVariable Long itemId) {
-        return itemService.getItemWithBookingAndComment(itemId, ownerId);
+        log.debug("получен запрос @RequestMapping(\"/items\") @GetMapping(\"/{itemId}\")" + ownerId + itemId);
+        ItemWithBookingAndCommentsDto dto = itemService.getItemWithBookingAndComment(itemId, ownerId);
+        log.debug("Отправлен ответ: " + dto.toString());
+        //return itemService.getItemWithBookingAndComment(itemId, ownerId);
+        return dto;
     }
 
     @GetMapping()
     public List<ItemWithBookingAndCommentsDto> getAll(@RequestHeader("X-Sharer-User-Id") Long userId) {
-        return itemService.getItemsByUserId(userId);
+
+        log.info("получен запрос @RequestMapping(\"/items\") @GetMapping()" + userId);
+        List<ItemWithBookingAndCommentsDto> dto = itemService.getItemsByUserId(userId);
+        log.info("Отправлен ответ" + dto.toString());
+        return dto;
     }
 
     @GetMapping("/search")
@@ -41,12 +49,24 @@ public class ItemController {
      * Добавление новой вещи. Будет происходить по эндофиту POST /items. На вход поступает объект ItemDto. userId в
      * заголовке X-Sharer-User-Id — это идентификатор пользователя, который добавляет вещь. Именно этот пользователь —
      * владелец вещи. Идентификатор владельца будет поступать на вход в каждом из запросов, рассмотренных далее.
+     *
      * @return добавленная в БД вещь.
      */
     @PostMapping
     public ItemDto add(@RequestHeader(value = "X-Sharer-User-Id", required = false) Long ownerId,
                        @RequestBody @Validated ItemDto itemDto) {
-        return itemService.add(itemDto, ownerId);
+
+        log.trace("A TRACE Message");
+        log.debug("A DEBUG Message");
+        log.info("An INFO Message");
+        log.warn("A WARN Message");
+        log.error("An ERROR Message");
+
+        log.info("получен запрос @RequestMapping(\"/items\") @PostMapping" + ownerId + itemDto.toString());
+        ItemDto dto = itemService.add(itemDto, ownerId);
+        log.info("Отправлен ответ" + dto.toString());
+
+        return dto;
     }
 
     @PatchMapping("{itemId}")

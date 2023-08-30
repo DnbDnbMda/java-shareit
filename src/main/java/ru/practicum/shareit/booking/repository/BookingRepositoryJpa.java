@@ -12,6 +12,7 @@ import java.util.List;
 public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     /**
      * Метод возвращает список бронирований, созданных пользователем, отсортированных по времени.
+     *
      * @param user пользователь, создавший бронирования.
      * @return список бронирований.
      */
@@ -23,6 +24,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     /**
      * Метод возвращает все бронирования пользователя, которые действуют на промежутке времени.
      * <p>Если dateTime1 = dateTime2 = now(), то вернётся список вещей, которые сейчас в аренде.</p>
+     *
      * @param user      пользователь, брони которого надо найти.
      * @param dateTime1 Момент времени, до которого должна была начаться аренда.
      * @param dateTime2 Момент времени, после которого должна закончиться аренда.
@@ -38,6 +40,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     /**
      * Метод возвращает все бронирования вещей пользователя, которые действуют на промежутке времени.
      * <p>Если dateTime1 = dateTime2 = now(), то вернётся список вещей, которые сейчас в аренде.</p>
+     *
      * @param user      пользователь, брони вещей которого надо найти.
      * @param dateTime1 Момент времени, до которого должна была начаться аренда.
      * @param dateTime2 Момент времени, после которого должна закончиться аренда.
@@ -50,8 +53,19 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     List<Booking> findAllBookingsItemByForOwnerWithStartAndEndTime(
             User user, LocalDateTime dateTime1, LocalDateTime dateTime2);
 
+    @Query("select b from Booking b " +
+            "where b.item.owner = ?1 ")
+    List<Booking> findAllBookingsItemByForOwner(User user);
+       /*@Query("select b from Booking b " +
+            "where b.item.owner = ?1 " +
+            "and b.status = 'REJECTED' ")*/
+ /*   @Query(value = "SELECT b FROM Booking b WHERE b.item.owner NOT IN (:rejectedStatus, :cancelledStatus)", nativeQuery = true)
+    List<Booking> findAllBookingsByOwnerNotIn(User user);*/
+    //b.bookingStatus = APPROVED and b.bookingStatus = WAITING
+
     /**
      * Метод возвращает все брони пользователя завершённые до даты.
+     *
      * @param user          пользователь, брони которого надо найти.
      * @param localDateTime момент времени, до которого должна закончиться аренда.
      * @return список бронирований.
@@ -61,6 +75,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
 
     /**
      * Возвращает все брони пользователя, начало которых после даты.
+     *
      * @param user          пользователь, брони которого надо найти.
      * @param localDateTime момент времени, после которого должна начаться аренда.
      * @return список бронирований.
@@ -70,6 +85,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
 
     /**
      * Возвращает все брони пользователя, статус которых такой-то.
+     *
      * @param user          пользователь, брони которого надо найти.
      * @param bookingStatus статус.
      * @return список бронирований.
@@ -83,6 +99,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
 
     /**
      * Метод возвращает список бронирований вещей пользователя, отсортированных по времени.
+     *
      * @param userId пользователь, хозяин вещей.
      * @return список бронирований.
      */
@@ -92,6 +109,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     /**
      * Метод возвращает все бронирования вещей пользователя, которые действуют на промежутке времени.
      * <p>Если dateTime1 = dateTime2 = now(), то вернётся список вещей, которые сейчас в аренде.</p>
+     *
      * @param user      пользователь, брони которого надо найти.
      * @param dateTime1 Момент времени, до которого должна была начаться аренда.
      * @param dateTime2 Момент времени, после которого должна закончиться аренда.
@@ -102,6 +120,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
 
     /**
      * Метод возвращает все брони вещей пользователя завершённые до даты.
+     *
      * @param user          пользователь, брони которого надо найти.
      * @param localDateTime момент времени, до которого должна закончиться аренда.
      * @return список бронирований.
@@ -112,6 +131,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
 
     /**
      * Возвращает все брони пользователя, начало которых после даты.
+     *
      * @param user          пользователь, брони которого надо найти.
      * @param localDateTime момент времени, после которого должна начаться аренда.
      * @return список бронирований.
@@ -121,6 +141,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
 
     /**
      * Возвращает все брони пользователя, статус которых такой-то.
+     *
      * @param user          пользователь, брони которого надо найти.
      * @param bookingStatus статус.
      * @return список бронирований.

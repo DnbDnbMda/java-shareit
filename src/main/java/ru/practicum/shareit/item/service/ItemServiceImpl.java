@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.mapper.BookingForItemDtoMapper;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.BookingStatus;
+import ru.practicum.shareit.booking.repository.BookingRepositoryJpa;
 import ru.practicum.shareit.exception.NotFoundRecordInBD;
 import ru.practicum.shareit.exception.ValidateException;
 import ru.practicum.shareit.item.comment.dto.CommentDto;
@@ -39,12 +40,14 @@ public class ItemServiceImpl implements ItemService {
     private final CommentRepository commentRepository;
     private final ItemWithBookingAndCommentsDtoMapper itemWithBAndCDtoMapper;
     private final CommentDtoMapper commentDtoMapper;
+    private final BookingRepositoryJpa bookingRepositoryJpa;
 
 
     /**
      * Обновить вещь в БД. Редактирование вещи. Эндпойнт PATCH /items/{itemId}.
      * <p>Изменить можно название, описание и статус доступа к аренде.</p>
      * <p>Редактировать вещь может только её владелец.</p>
+     *
      * @param itemDto вещь.
      * @return обновлённая вещь.
      */
@@ -81,6 +84,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Добавить вещь в репозиторий.
+     *
      * @param itemDto добавленная вещь.
      * @param ownerId ID владельца вещи.
      * @return добавленная вещь.
@@ -98,10 +102,12 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Получить список вещей пользователя с ID.
+     *
      * @return список вещей пользователя.
      */
     @Override
     public List<ItemWithBookingAndCommentsDto> getItemsByUserId(Long ownerId) {
+
         User owner = userRepository.findById(ownerId).orElseThrow(() ->
                 new NotFoundRecordInBD("Ошибка при получении списка вещей пользователя с ID = " + ownerId
                         + "в БД. В БД отсутствует запись о пользователе."));
@@ -128,6 +134,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Получить вещь по ID.
+     *
      * @param itemId ID вещи.
      * @return запрашиваемая вещь.
      */
@@ -140,6 +147,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Удалить вещь с ID из хранилища.
+     *
      * @param itemId ID удаляемой вещи.
      */
     @Override
@@ -149,6 +157,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Поиск вещей по тексту.
+     *
      * @param text текст.
      * @return список вещей.
      */
@@ -165,6 +174,7 @@ public class ItemServiceImpl implements ItemService {
     /**
      * Теперь нужно, чтобы владелец видел даты последнего и ближайшего следующего
      * бронирования для каждой вещи, когда просматривает вещь.
+     *
      * @param itemId  ID вещи.
      * @param ownerId пользователь
      * @return вещь с информацией о бронированиях.
@@ -177,7 +187,9 @@ public class ItemServiceImpl implements ItemService {
         User ownerFromBd = userRepository.findById(ownerId)
                 .orElseThrow(() -> new NotFoundRecordInBD("Ошибка при обновлении вещи с ID = " + itemId
                         + " пользователя с ID = " + ownerId + " в БД. В БД отсутствует запись о пользователе."));
-        List<Booking> allBookings = itemFromBd.getBookings();
+        //List<Booking> allBookings = itemFromBd.getBookings();
+        //List<Booking> allBookings = bookingRepositoryJpa.findAllByBookerAndBookingStatusEqualsOrderByStartTimeDesc(ownerFromBd, BookingStatus.APPROVED);
+        List<Booking> allBookings = bookingRepositoryJpa.findAllBookingsItemByForOwner(ownerFromBd);
         Booking lastBooking = null;
         Booking nextBooking = null;
         LocalDateTime now = LocalDateTime.now();
@@ -199,6 +211,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Добавить комментарий к вещи пользователем, действительно бравшим вещь в аренду.
+     *
      * @param bookerId ID пользователя, добавляющего комментарий.
      * @param itemId   ID вещи, которой оставляется комментарий.
      */
@@ -236,6 +249,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Метод поиска первой аренды после указанной даты.
+     *
      * @param bookings список бронирований.
      * @param now      момент времени.
      * @return следующее бронирование после даты.
@@ -244,7 +258,9 @@ public class ItemServiceImpl implements ItemService {
         Booking first = null;
         if (bookings != null && !bookings.isEmpty()) {
             for (Booking b : bookings) {
-                if (b.getStartTime().isAfter(now)) {
+                if (b.getStartTime().isAfter(now)
+                        && b.getBookingStatus() != BookingStatus.CANCELED
+                        && b.getBookingStatus() != BookingStatus.REJECTED) {
                     //Если результат равен null и начало после момента и статус равен (это или это)
                     if (first == null && (b.getBookingStatus().equals(BookingStatus.APPROVED)
                             || b.getBookingStatus().equals(BookingStatus.WAITING))) {
@@ -263,6 +279,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Метод поиска последней аренды до указанной даты.
+     *
      * @param bookings список бронирований.
      * @param now      момент времени.
      * @return последнее бронирование до указанной даты.
