@@ -22,5 +22,4 @@ public class BookingForResponse {
     private ItemForResponseDto item;
     private UserOnlyWithIdDto booker;
     private BookingStatus status;
-
 }

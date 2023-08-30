@@ -13,6 +13,7 @@ public class BookingRepositoryInMemoryImpl implements BookingRepositoryInMemory 
 
     /**
      * Получить список всех бронирований.
+     *
      * @return список бронирований.
      */
     @Override
@@ -22,6 +23,7 @@ public class BookingRepositoryInMemoryImpl implements BookingRepositoryInMemory 
 
     /**
      * Получить бронирование по ID.
+     *
      * @param id ID брони.
      * @return запрашиваемое бронирование.
      */
@@ -32,18 +34,19 @@ public class BookingRepositoryInMemoryImpl implements BookingRepositoryInMemory 
 
     /**
      * Получить список бронирований пользователя с ID.
+     *
      * @param userId ID пользователя.
      * @return список бронирований.
      */
     @Override
     public List<Booking> getBookingsByUserId(Long userId) {
-
         return bookingMap.values().stream().filter(b -> b.getBooker().getId().equals(userId))
                 .collect(Collectors.toList());
     }
 
     /**
      * Удалить бронирования пользователя с ID = userId.
+     *
      * @param userId ID пользователя.
      */
     @Override

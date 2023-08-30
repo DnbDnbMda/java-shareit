@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "items", schema = "public")
 public class Item {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, unique = true)
@@ -29,12 +28,10 @@ public class Item {
     private User owner;       //хозяин вещи.
     @Column(name = "is_available", nullable = false)
     private Boolean available;  //Статус для бронирования: свободна, занята.
-
     @Column(name = "request_id")
     private Long requestId;  //Вещь создана по запросу ищущего пользователя (True - да)?
     @OneToMany(mappedBy = "item")
     private List<Booking> bookings;
-
     @OneToMany(mappedBy = "item")
     private List<Comment> comments;   //фидбеки на вещь.
 }

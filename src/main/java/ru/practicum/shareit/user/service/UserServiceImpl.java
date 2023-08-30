@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Получить пользователя по ID.
+     *
      * @param id ID пользователя.
      * @return User - пользователь присутствует в библиотеке.
      * <p>null - пользователя нет в библиотеке.</p>
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Получение списка всех пользователей.
+     *
      * @return Список пользователей.
      */
     @Override
@@ -50,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Добавить юзера в БД.
+     *
      * @param userDto пользователь.
      * @return добавляемый пользователь.
      */
@@ -61,6 +64,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Обновить юзера в БД.
+     *
      * @param userDto пользователь
      * @return обновлённый пользователь.
      */
@@ -84,6 +88,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Удалить пользователя из БД.
+     *
      * @param id ID удаляемого пользователя
      * @throws NotFoundRecordInBD из метода validationService.checkExistUserInDB(id).
      */
@@ -94,26 +99,27 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Добавить пользователей с ID1 и ID2 в друзья.
+     *
      * @param id1 пользователь №1;
      * @param id2 пользователь №2.
      */
     @Override
     public void addEachOtherAsFriends(Long id1, Long id2) {
-
     }
 
     /**
      * Удалить пользователей из друзей.
+     *
      * @param id1 пользователь №1.
      * @param id2 пользователь №2.
      */
     @Override
     public void deleteFromFriends(Long id1, Long id2) {
-
     }
 
     /**
      * Вывести список общих друзей.
+     *
      * @param id1 пользователь №1
      * @param id2 пользователь №2
      * @return список общих друзей.
@@ -125,6 +131,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Вывести список друзей пользователя с ID.
+     *
      * @param id ID пользователя.
      * @return список друзей.
      */
@@ -135,6 +142,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Метод проверки наличия пользователя в базе данных по ID.
+     *
      * @param id пользователь, наличие логина которого необходимо проверить в базе данных.
      * @return ID, найденный в БД по логину. Если возвращается не null, то после этой проверки можно обновлять
      * пользователя, присвоив ему ID из базы данных.
@@ -147,6 +155,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Проверка наличия пользователя по `Email`.
+     *
      * @param newEmail адрес эл. почты нового пользователя.
      * @return ID пользователя с Email, если он есть в БД.
      * <p>Null, если нет.</p>

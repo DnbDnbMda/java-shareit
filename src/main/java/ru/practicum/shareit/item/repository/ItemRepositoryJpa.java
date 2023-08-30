@@ -10,11 +10,11 @@ import java.util.List;
 public interface ItemRepositoryJpa extends JpaRepository<Item, Long> {
     /**
      * Поиск вещей пользователя.
+     *
      * @param owner пользователь, чьи вещи надо найти в БД.
      * @return список вещей.
      */
     List<Item> findAllByOwnerOrderById(User owner);
-
 
     @Query("select item from Item item "
             + "where lower(item.name) like lower(concat('%', ?1, '%')) "

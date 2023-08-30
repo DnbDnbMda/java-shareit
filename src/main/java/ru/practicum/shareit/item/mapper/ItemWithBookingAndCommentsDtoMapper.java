@@ -4,8 +4,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.practicum.shareit.item.dto.ItemWithBookingAndCommentsDto;
 import ru.practicum.shareit.item.model.Item;
-//Mapstruct хватит, чтобы на основании интерфейса UserMapper на этапе компиляции сгенерировать нужную
-// реализацию, которая будет переводить.
 
 @Mapper(componentModel = "spring")
 public interface ItemWithBookingAndCommentsDtoMapper {

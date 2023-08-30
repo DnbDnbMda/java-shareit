@@ -20,21 +20,16 @@ import java.util.List;
 public class ItemController {
     private final ItemService itemService;
 
-
     @GetMapping("/{itemId}")
     public ItemWithBookingAndCommentsDto getItemByIdForOwner(@RequestHeader(value = "X-Sharer-User-Id") Long ownerId,
                                                              @PathVariable Long itemId) {
-        log.debug("получен запрос @RequestMapping(\"/items\") @GetMapping(\"/{itemId}\")" + ownerId + itemId);
         ItemWithBookingAndCommentsDto dto = itemService.getItemWithBookingAndComment(itemId, ownerId);
         log.debug("Отправлен ответ: " + dto.toString());
-        //return itemService.getItemWithBookingAndComment(itemId, ownerId);
         return dto;
     }
 
     @GetMapping()
     public List<ItemWithBookingAndCommentsDto> getAll(@RequestHeader("X-Sharer-User-Id") Long userId) {
-
-        log.info("получен запрос @RequestMapping(\"/items\") @GetMapping()" + userId);
         List<ItemWithBookingAndCommentsDto> dto = itemService.getItemsByUserId(userId);
         log.info("Отправлен ответ" + dto.toString());
         return dto;
@@ -55,17 +50,8 @@ public class ItemController {
     @PostMapping
     public ItemDto add(@RequestHeader(value = "X-Sharer-User-Id", required = false) Long ownerId,
                        @RequestBody @Validated ItemDto itemDto) {
-
-        log.trace("A TRACE Message");
-        log.debug("A DEBUG Message");
-        log.info("An INFO Message");
-        log.warn("A WARN Message");
-        log.error("An ERROR Message");
-
-        log.info("получен запрос @RequestMapping(\"/items\") @PostMapping" + ownerId + itemDto.toString());
         ItemDto dto = itemService.add(itemDto, ownerId);
         log.info("Отправлен ответ" + dto.toString());
-
         return dto;
     }
 
@@ -81,6 +67,4 @@ public class ItemController {
                                        @PathVariable Long itemId, @RequestBody CommentDto inputCommentDto) {
         return itemService.saveComment(userId, itemId, inputCommentDto);
     }
-
-
 }

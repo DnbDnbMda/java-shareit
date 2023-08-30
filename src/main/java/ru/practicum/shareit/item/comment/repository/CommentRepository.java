@@ -10,6 +10,7 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     /**
      * Поиск комментариев к вещи.
+     *
      * @param itemId ID вещи.
      * @return список комментариев.
      */

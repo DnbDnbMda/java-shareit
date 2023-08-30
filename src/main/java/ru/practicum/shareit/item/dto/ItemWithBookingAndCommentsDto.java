@@ -19,11 +19,9 @@ public class ItemWithBookingAndCommentsDto {
     private String name;
     private String description;
     private Boolean available;
-
     private BookingForItemDto lastBooking;
     private BookingForItemDto nextBooking;
     private Long requestId;
     @JsonProperty("comments")
     private List<CommentDto> feedbacks;
-
 }

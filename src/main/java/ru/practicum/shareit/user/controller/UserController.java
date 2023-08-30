@@ -23,6 +23,7 @@ public class UserController {
 
     /**
      * Добавить юзера в БД.
+     *
      * @param userDto пользователь.
      * @return добавляемый пользователь.
      */
@@ -39,6 +40,7 @@ public class UserController {
 
     /**
      * Обновить юзера в БД.
+     *
      * @param userDto пользователь
      * @param userId  ID обновляемого пользователя.
      * @return обновлённый пользователь.
@@ -54,6 +56,7 @@ public class UserController {
 
     /**
      * Удалить пользователя из БД.
+     *
      * @param userId ID удаляемого пользователя.
      */
     @DeleteMapping("/{userId}")
@@ -66,6 +69,7 @@ public class UserController {
 
     /**
      * Получить список всех пользователей.
+     *
      * @return список пользователей.
      */
     @GetMapping
@@ -79,6 +83,7 @@ public class UserController {
 
     /**
      * Получить пользователя по ID.
+     *
      * @param userId ID пользователя.
      * @return User - пользователь присутствует в библиотеке.
      * <p>null - пользователя нет в библиотеке.</p>

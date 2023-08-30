@@ -17,7 +17,6 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
      * @return список бронирований.
      */
     @Query("select b from Booking b where b.booker = ?1 order by b.startTime DESC")
-//    List<Booking> findAllByBookerOrderByStartTimeDesc(User user);     //Или так.
     List<Booking> findAllBookingsByBooker(User user);
 
 
@@ -33,8 +32,7 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     @Query("select b from Booking b " +
             "where b.booker = ?1 and b.startTime < ?2 and b.endTime > ?3 " +
             "order by b.startTime DESC")
-//    List<Booking> findAllByBookerAndStartTimeBeforeAndEndTimeAfterOrderByStartTimeDesc(   //Или так
-    List<Booking> findAllBookingsForBookerWithStartAndEndTime(
+    List<Booking> findAllBookingsForBookerWithStartAndEndTimeDesc(
             User user, LocalDateTime dateTime1, LocalDateTime dateTime2);
 
     /**
@@ -49,19 +47,12 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     @Query("select b from Booking b " +
             "where b.item.owner = ?1 and b.startTime < ?2 and b.endTime > ?3 " +
             "order by b.startTime DESC")
-//    List<Booking> findAllByItem_OwnerAndStartTimeIsBeforeAndEndTimeIsAfterOrderByStartTimeDesc(
     List<Booking> findAllBookingsItemByForOwnerWithStartAndEndTime(
             User user, LocalDateTime dateTime1, LocalDateTime dateTime2);
 
     @Query("select b from Booking b " +
             "where b.item.owner = ?1 ")
     List<Booking> findAllBookingsItemByForOwner(User user);
-       /*@Query("select b from Booking b " +
-            "where b.item.owner = ?1 " +
-            "and b.status = 'REJECTED' ")*/
- /*   @Query(value = "SELECT b FROM Booking b WHERE b.item.owner NOT IN (:rejectedStatus, :cancelledStatus)", nativeQuery = true)
-    List<Booking> findAllBookingsByOwnerNotIn(User user);*/
-    //b.bookingStatus = APPROVED and b.bookingStatus = WAITING
 
     /**
      * Метод возвращает все брони пользователя завершённые до даты.
@@ -94,9 +85,6 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
     List<Booking> findAllByBookerAndBookingStatusEqualsOrderByStartTimeDesc(
             User user, BookingStatus bookingStatus);
 
-
-    //////////////////////////////////
-
     /**
      * Метод возвращает список бронирований вещей пользователя, отсортированных по времени.
      *
@@ -104,7 +92,6 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
      * @return список бронирований.
      */
     List<Booking> findAllByItem_OwnerOrderByStartTimeDesc(User userId);
-
 
     /**
      * Метод возвращает все бронирования вещей пользователя, которые действуют на промежутке времени.
@@ -149,5 +136,4 @@ public interface BookingRepositoryJpa extends JpaRepository<Booking, Long> {
 
     List<Booking> findAllByItem_OwnerAndBookingStatusEqualsOrderByStartTimeDesc(
             User user, BookingStatus bookingStatus);
-
 }

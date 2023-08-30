@@ -13,9 +13,7 @@ public class ItemWithBookingDto {
     private String name;
     private String description;
     private Boolean available;
-
     private BookingForItemDto lastBooking;
     private BookingForItemDto nextBooking;
     private Long requestId;
-
 }

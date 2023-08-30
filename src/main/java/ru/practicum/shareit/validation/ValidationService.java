@@ -19,13 +19,13 @@ import ru.practicum.shareit.user.repository.UserRepositoryInMemory;
 public class ValidationService {
     private final ItemRepositoryInMemory itemRepositoryInMemory;
     private final UserRepositoryInMemory userRepository;
-
     private final UserMapper userMapper;
 
     /**
      * Проверка пользователя на уникальность почты в БД при ОБНОВЛЕНИИ пользователя.
      * <p>Если почта принадлежит этому же пользователю, то всё хорошо.</p>
      * <p>Если почта принадлежит другому пользователю, то генерируется исключение.</p>
+     *
      * @param user пользователь.
      * @throws ValidateException генерируемое исключение.
      */
@@ -48,14 +48,12 @@ public class ValidationService {
                     "принадлежит пользователю с ID = %d.", inputEmail, idFromDbByEmail);
             log.info(message + " Входящий пользователь: " + user);
             throw new ConflictException(message);
-        } //else if ()
+        }
     }
-
 
     public void checkUniqueEmailToCreate(UserDto user) {
         final Long inputId = user.getId();
         final String inputEmail = user.getEmail();
-
 
         Long idFromDbByEmail = userRepository.getUserIdByEmail(inputEmail);
         //Надо проверить уникальность почты.
@@ -72,6 +70,7 @@ public class ValidationService {
      * Проверка пользователя на уникальность почты.
      * <p>Если почта принадлежит этому же пользователю, то всё хорошо.</p>
      * <p>Если почта принадлежит другому пользователю, то генерируется исключение.</p>
+     *
      * @param user пользователь.
      * @throws ValidateException генерируемое исключение.
      */
@@ -84,7 +83,6 @@ public class ValidationService {
             throw new NotFoundRecordInBD(message);
         }
 
-
         if (idFromDB != null && user.getId() != null && !idFromDB.equals(user.getId())) {
             //Если ID из БД != ID входящего юзера, значит email принадлежит другому юзеру.
             String message = String.format("Email = '%s' уже есть в БД.", newEmail);
@@ -95,6 +93,7 @@ public class ValidationService {
 
     /**
      * Проверка всех полей пользователя.
+     *
      * @param user пользователь.
      * @throws ValidateException генерируемое исключение.
      */
@@ -117,6 +116,7 @@ public class ValidationService {
     /**
      * Проверка полей пользователя.
      * <p>Если оба поля 'name' и 'email' равны null, то генерируется исключение.</p>
+     *
      * @return массив boolean. Если поле null, то False.
      * <p>Первый элемент - имя, второй - email.</p>
      */
@@ -136,6 +136,7 @@ public class ValidationService {
 
     /**
      * Проверка наличия юзера в БД.
+     *
      * @param userId пользователя.
      * @throws NotFoundRecordInBD - пользователь не найден в БД.
      */
@@ -147,15 +148,11 @@ public class ValidationService {
             throw new NotFoundRecordInBD(error);
         }
         return userMapper.mapToDto(result);
-
     }
-
-    /////////////////////////////////////////////////////////////////////////////////
-    //////////                  Проверки для вещей.                   ///////////////
-    /////////////////////////////////////////////////////////////////////////////////
 
     /**
      * Проверка наличия вещи в БД.
+     *
      * @param itemId ID вещи.
      * @return Null - вещь не найдена.
      * <p>Item -  вещь найдена.</p>
@@ -173,6 +170,7 @@ public class ValidationService {
 
     /**
      * Проверка отсутствия вещи в БД.
+     *
      * @param itemId ID вещи.
      * @throws ConflictException Если вещь есть в БД, то генерируется исключение.
      */
@@ -187,6 +185,7 @@ public class ValidationService {
 
     /**
      * Проверка всех полей вещей.
+     *
      * @param item вещь.
      * @throws ValidateException генерируемое исключение.
      */
@@ -204,24 +203,19 @@ public class ValidationService {
             log.info(error);
             throw new ValidateException(error);
         }
+
         final Boolean available = item.getAvailable();
         if (available == null) {
             String error = "Для вещи необходим статус её бронирования.";
             log.info(error);
             throw new ValidateException(error);
         }
-    /*    final Long ownerId = item.getOwner().getId();
-        if (ownerId == null) {
-            String error = "Для вещи необходим хозяин.";
-            log.info(error);
-            throw new ValidateException(error);
-        }*/
     }
-
 
     /**
      * Проверка полей пользователя.
      * <p>Если оба поля 'name' и 'email' равны null, то генерируется исключение.</p>
+     *
      * @return массив boolean. Если поле null, то False.
      * <p>Первый элемент - name, второй - description, третий - ownerId, четвёртый - available,</p>
      * <p>пятый - isRequest, шестой - отзывы.</p>
@@ -239,9 +233,9 @@ public class ValidationService {
         throw new ValidateException("Все поля: название, описание и статус доступа к аренде равны 'null'.");
     }
 
-
     /**
      * Проверка: принадлежит ли вещь её хозяину.
+     *
      * @return True - вещь принадлежит хозяину.
      * <p>False - вещь не принадлежит хозяину.</p>
      * @throws ValidateException Если вещь и (или) ID хозяина = null.

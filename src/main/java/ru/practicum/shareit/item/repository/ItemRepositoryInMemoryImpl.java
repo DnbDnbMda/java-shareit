@@ -16,6 +16,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Добавить вещь в репозиторий.
+     *
      * @param item добавленная вещь.
      * @return добавленная вещь.
      */
@@ -28,6 +29,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Получить список всех вещей.
+     *
      * @return список вещей.
      */
     @Override
@@ -38,6 +40,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Получить вещь по ID.
+     *
      * @param id ID вещи.
      * @return запрашиваемая вещь.
      */
@@ -48,6 +51,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Есть ли вещь с ID в хранилище?
+     *
      * @param id ID запрашиваемой вещи.
      * @return True - вещь есть в хранилище, False - вещи нет в хранилище.
      */
@@ -58,6 +62,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Удалить вещь с ID из хранилища.
+     *
      * @param id ID удаляемой вещи.
      */
     @Override
@@ -67,6 +72,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Удалить вещи пользователя с ID = userId.
+     *
      * @param userId ID пользователя, вещи которого надо удалить.
      */
     @Override
@@ -80,6 +86,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Обновить вещь в БД.
+     *
      * @param item вещь.
      * @return обновлённая вещь.
      */
@@ -108,6 +115,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
 
     /**
      * Поиск вещей по тексту.
+     *
      * @param text текст.
      * @return список вещей.
      */
@@ -119,5 +127,4 @@ public class ItemRepositoryInMemoryImpl implements ItemRepositoryInMemory {
                         item.getAvailable())
                 .collect(Collectors.toList());
     }
-
 }

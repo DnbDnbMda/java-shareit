@@ -8,7 +8,6 @@ import ru.practicum.shareit.booking.dto.BookingForResponse;
 import ru.practicum.shareit.booking.service.BookingService;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,7 +19,7 @@ public class BookingController {
     private final BookingService bookingService;
 
     /**
-     * • Добавление нового запроса на бронирование. Запрос может быть создан любым пользователем,
+     * Добавление нового запроса на бронирование. Запрос может быть создан любым пользователем,
      * а затем подтверждён владельцем вещи. Эндпоинт — POST /bookings.
      * После создания запрос находится в статусе WAITING — «ожидает подтверждения».
      */
@@ -28,15 +27,16 @@ public class BookingController {
     public BookingForResponse add(@RequestHeader("X-Sharer-User-Id") Long bookerId,
                                   @Valid @RequestBody BookingDto bookingDto) {
         log.info("Создание брони.");
-        System.out.println(bookingDto);
+        log.info(bookingDto.toString());
         return bookingService.createBooking(bookerId, bookingDto);
     }
 
     /**
-     * • Подтверждение или отклонение запроса на бронирование. Может быть выполнено только владельцем вещи.
+     * Подтверждение или отклонение запроса на бронирование. Может быть выполнено только владельцем вещи.
      * Затем статус бронирования становится либо APPROVED, либо REJECTED.
      * Эндпоинт — PATCH /bookings/{bookingId}?approved={approved}, параметр approved может принимать
      * значения true или false.
+     *
      * @param ownerId   ID владельца вещи.
      * @param bookingId ID брони.
      * @param approved  True - подтверждено, False - отклонено.
@@ -51,7 +51,7 @@ public class BookingController {
     }
 
     /**
-     * • Получение данных о конкретном бронировании (включая его статус).
+     * Получение данных о конкретном бронировании (включая его статус).
      * Может быть выполнено либо автором бронирования, либо владельцем вещи,
      * к которой относится бронирование.
      * Эндпоинт — GET /bookings/{bookingId}.
@@ -64,7 +64,7 @@ public class BookingController {
     }
 
     /**
-     * • Получение списка всех бронирований текущего пользователя.
+     * Получение списка всех бронирований текущего пользователя.
      * Эндпоинт — GET /bookings?state={state}.
      * Параметр state необязательный и по умолчанию равен ALL (англ. «все»).
      * Также он может принимать значения CURRENT (англ. «текущие»), PAST (англ. «завершённые»),
@@ -80,7 +80,7 @@ public class BookingController {
     }
 
     /**
-     * • Получение списка бронирований для всех вещей текущего пользователя.
+     * Получение списка бронирований для всех вещей текущего пользователя.
      * Эндпоинт — GET /bookings/owner?state={state}.
      * Этот запрос имеет смысл для владельца хотя бы одной вещи.
      * Работа параметра state аналогична его работе в предыдущем сценарии.
@@ -90,7 +90,6 @@ public class BookingController {
                                                  @RequestParam(value = "state", defaultValue = "ALL",
                                                          required = false) String state) {
         log.info("Получение списка бронирований для всех вещей текущего пользователя.");
-        LocalDateTime nowTime = LocalDateTime.now();
         return bookingService.getByOwnerId(userId, state);
     }
 }

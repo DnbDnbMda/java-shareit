@@ -55,7 +55,6 @@ public class BookingServiceImpl implements BookingService {
         User bookerFromDb = userRepositoryJpa.findById(bookerId).orElseThrow(() -> new NotFoundRecordInBD("При " +
                 "создании бронирования не найден пользователь с ID = " + bookerId + " в БД."));
 
-
         validateBooking(bookingDto, itemFromDB, bookerFromDb);
         bookingDto.setBookingStatus(BookingStatus.WAITING);
         Booking booking = bookingMapper.mapToModel(bookingDto);
@@ -160,7 +159,7 @@ public class BookingServiceImpl implements BookingService {
                 break;
             }
             case CURRENT: {
-                result = bookingRepositoryJpa.findAllBookingsForBookerWithStartAndEndTime(
+                result = bookingRepositoryJpa.findAllBookingsForBookerWithStartAndEndTimeDesc(
                         bookerFromDb, nowDateTime, nowDateTime);
                 break;
             }

@@ -42,7 +42,6 @@ public class ItemServiceImpl implements ItemService {
     private final CommentDtoMapper commentDtoMapper;
     private final BookingRepositoryJpa bookingRepositoryJpa;
 
-
     /**
      * Обновить вещь в БД. Редактирование вещи. Эндпойнт PATCH /items/{itemId}.
      * <p>Изменить можно название, описание и статус доступа к аренде.</p>
@@ -144,7 +143,6 @@ public class ItemServiceImpl implements ItemService {
                 -> new NotFoundRecordInBD("Error 404. Запись о вещи с Id = " + itemId + " не найдена в БД.")));
     }
 
-
     /**
      * Удалить вещь с ID из хранилища.
      *
@@ -187,8 +185,6 @@ public class ItemServiceImpl implements ItemService {
         User ownerFromBd = userRepository.findById(ownerId)
                 .orElseThrow(() -> new NotFoundRecordInBD("Ошибка при обновлении вещи с ID = " + itemId
                         + " пользователя с ID = " + ownerId + " в БД. В БД отсутствует запись о пользователе."));
-        //List<Booking> allBookings = itemFromBd.getBookings();
-        //List<Booking> allBookings = bookingRepositoryJpa.findAllByBookerAndBookingStatusEqualsOrderByStartTimeDesc(ownerFromBd, BookingStatus.APPROVED);
         List<Booking> allBookings = bookingRepositoryJpa.findAllBookingsItemByForOwner(ownerFromBd);
         Booking lastBooking = null;
         Booking nextBooking = null;
