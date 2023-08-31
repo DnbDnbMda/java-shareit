@@ -24,7 +24,7 @@ public class BookingController {
      * После создания запрос находится в статусе WAITING — «ожидает подтверждения».
      */
     @PostMapping
-    public BookingForResponse add(@RequestHeader("X-Sharer-User-Id") Long bookerId,
+    public BookingForResponse add(@RequestHeader("${defaultHeader}") Long bookerId,
                                   @Valid @RequestBody BookingDto bookingDto) {
         log.info("Создание брони. " + bookingDto.toString());
         return bookingService.createBooking(bookerId, bookingDto);
@@ -42,7 +42,7 @@ public class BookingController {
      * @return Обновленная бронь.
      */
     @PatchMapping("/{bookingId}")
-    BookingForResponse updateByOwner(@RequestHeader("X-Sharer-User-Id") Long ownerId,
+    BookingForResponse updateByOwner(@RequestHeader("${defaultHeader}") Long ownerId,
                                      @PathVariable Long bookingId,
                                      @RequestParam Boolean approved) {
         log.info("Обновление брони владельцем. Подтверждение или отклонение брони.");
@@ -56,7 +56,7 @@ public class BookingController {
      * Эндпоинт — GET /bookings/{bookingId}.
      */
     @GetMapping("/{bookingId}")
-    BookingForResponse getWithStatusById(@RequestHeader("X-Sharer-User-Id") Long userId,
+    BookingForResponse getWithStatusById(@RequestHeader("${defaultHeader}") Long userId,
                                          @PathVariable Long bookingId) {
         log.info("Получение данных о конкретном бронировании (включая его статус).");
         return bookingService.getWithStatusById(userId, bookingId);
@@ -71,7 +71,7 @@ public class BookingController {
      * Бронирования должны возвращаться отсортированными по дате от более новых к более старым.
      */
     @GetMapping
-    List<BookingForResponse> getByUserId(@RequestHeader("X-Sharer-User-Id") Long userId,
+    List<BookingForResponse> getByUserId(@RequestHeader("${defaultHeader}") Long userId,
                                          @RequestParam(value = "state",
                                                  defaultValue = "ALL", required = false) String state) {
         log.info("Получение списка всех бронирований текущего пользователя.");
@@ -85,7 +85,7 @@ public class BookingController {
      * Работа параметра state аналогична его работе в предыдущем сценарии.
      */
     @GetMapping("/owner")
-    public List<BookingForResponse> getByOwnerId(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public List<BookingForResponse> getByOwnerId(@RequestHeader("${defaultHeader}") Long userId,
                                                  @RequestParam(value = "state", defaultValue = "ALL",
                                                          required = false) String state) {
         log.info("Получение списка бронирований для всех вещей текущего пользователя.");

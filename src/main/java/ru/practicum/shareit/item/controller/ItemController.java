@@ -21,7 +21,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/{itemId}")
-    public ItemWithBookingAndCommentsDto getItemByIdForOwner(@RequestHeader(value = "X-Sharer-User-Id") Long ownerId,
+    public ItemWithBookingAndCommentsDto getItemByIdForOwner(@RequestHeader("${defaultHeader}") Long ownerId,
                                                              @PathVariable Long itemId) {
         ItemWithBookingAndCommentsDto dto = itemService.getItemWithBookingAndComment(itemId, ownerId);
         log.debug("Отправлен ответ: " + dto.toString());
@@ -29,7 +29,7 @@ public class ItemController {
     }
 
     @GetMapping()
-    public List<ItemWithBookingAndCommentsDto> getAll(@RequestHeader("X-Sharer-User-Id") Long userId) {
+    public List<ItemWithBookingAndCommentsDto> getAll(@RequestHeader("${defaultHeader}") Long userId) {
         List<ItemWithBookingAndCommentsDto> dto = itemService.getItemsByUserId(userId);
         log.info("Отправлен ответ" + dto.toString());
         return dto;
@@ -48,7 +48,7 @@ public class ItemController {
      * @return добавленная в БД вещь.
      */
     @PostMapping
-    public ItemDto add(@RequestHeader(value = "X-Sharer-User-Id", required = false) Long ownerId,
+    public ItemDto add(@RequestHeader(value = "${defaultHeader}", required = false) Long ownerId,
                        @RequestBody @Validated ItemDto itemDto) {
         ItemDto dto = itemService.add(itemDto, ownerId);
         log.info("Отправлен ответ" + dto.toString());
@@ -56,14 +56,14 @@ public class ItemController {
     }
 
     @PatchMapping("{itemId}")
-    public ItemDto update(@RequestHeader(value = "X-Sharer-User-Id", required = false) Long ownerId,
+    public ItemDto update(@RequestHeader(value = "${defaultHeader}", required = false) Long ownerId,
                           @PathVariable Long itemId, @Validated @RequestBody ItemDto itemDto) {
         System.out.println(" - Обновление вещи с ID = " + itemId + " юзера с ID = " + ownerId + ".");
         return itemService.updateInStorage(itemId, itemDto, ownerId);
     }
 
     @PostMapping("/{itemId}/comment")
-    public CommentDto addCommentToItem(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public CommentDto addCommentToItem(@RequestHeader("${defaultHeader}") Long userId,
                                        @PathVariable Long itemId, @RequestBody CommentDto inputCommentDto) {
         return itemService.saveComment(userId, itemId, inputCommentDto);
     }
