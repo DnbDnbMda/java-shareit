@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @Setter
 @RequiredArgsConstructor
 @ToString
-
 public class BookingDto {
     private Long id;                  //ID бронирования.
     @NotNull(groups = {CreateObject.class}, message = "При создании брони должна быть информация о вещи.")
