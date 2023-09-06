@@ -1,6 +1,6 @@
 package ru.practicum.shareit.booking.repository;
 
-import ru.practicum.shareit.booking.Booking;
+import ru.practicum.shareit.booking.model.Booking;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BookingRepositoryImpl implements BookingRepository {
-    public final Map<Long, Booking> bookingMap = new HashMap<>();
+public class BookingRepositoryInMemoryImpl implements BookingRepositoryInMemory {
+    final Map<Long, Booking> bookingMap = new HashMap<>();
 
     /**
      * Получить список всех бронирований.
+     *
      * @return список бронирований.
      */
     @Override
@@ -22,6 +23,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     /**
      * Получить бронирование по ID.
+     *
      * @param id ID брони.
      * @return запрашиваемое бронирование.
      */
@@ -32,18 +34,19 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     /**
      * Получить список бронирований пользователя с ID.
+     *
      * @param userId ID пользователя.
      * @return список бронирований.
      */
     @Override
     public List<Booking> getBookingsByUserId(Long userId) {
-
         return bookingMap.values().stream().filter(b -> b.getBooker().getId().equals(userId))
                 .collect(Collectors.toList());
     }
 
     /**
      * Удалить бронирования пользователя с ID = userId.
+     *
      * @param userId ID пользователя.
      */
     @Override

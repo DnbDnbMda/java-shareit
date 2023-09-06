@@ -1,10 +1,11 @@
 package ru.practicum.shareit.user.repository;
 
+
 import ru.practicum.shareit.user.model.User;
 
 import java.util.List;
 
-public interface UserRepository {
+public interface UserRepositoryInMemory {
 
     /**
      * Добавить юзера в БД.
@@ -44,7 +45,6 @@ public interface UserRepository {
      * <p>null - пользователя нет в библиотеке.</p>
      */
     User getUserById(Long id);
-
 
     /**
      * Проверка наличия юзера в БД.

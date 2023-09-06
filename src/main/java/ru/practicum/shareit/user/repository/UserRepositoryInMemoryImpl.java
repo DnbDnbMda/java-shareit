@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 @Slf4j
 @Qualifier("InMemory")
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryInMemoryImpl implements UserRepositoryInMemory {
 
     private final HashMap<Long, User> userMap = new HashMap<>();
 
