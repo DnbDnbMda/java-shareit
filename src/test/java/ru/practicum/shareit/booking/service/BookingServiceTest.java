@@ -72,8 +72,8 @@ public class BookingServiceTest {
         // normal
         bookingDto.setEnd(LocalDateTime.now().plusDays(1));
         when(userRepository.findById(2)).thenReturn(Optional.of(booker));
-        Booking booking = Booking.builder().id(1).booker(booker).start(bookingDto.getStart()).
-                end(bookingDto.getEnd()).item(item).build();
+        Booking booking = Booking.builder().id(1).booker(booker).start(bookingDto.getStart())
+                        .end(bookingDto.getEnd()).item(item).build();
         when(bookingRepository.save(any(Booking.class))).thenReturn(booking);
         Booking result = bookingService.addBooking(bookingDto, booker.getId());
         assertNotNull(result);
