@@ -22,5 +22,4 @@ public class PostItemDto {
     @NotNull(groups = {Create.class})
     private Boolean available;
     private Integer requestId;
-
 }

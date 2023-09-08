@@ -7,10 +7,10 @@ import ru.practicum.shareit.user.model.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Builder
 @Getter
 @Setter
 @EqualsAndHashCode
+@Builder
 @Entity(name = "bookings")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,5 +34,4 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private BookingStatus status;
-
 }

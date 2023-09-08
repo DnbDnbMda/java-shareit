@@ -48,7 +48,8 @@ public class BookingRepositoryTest {
         bookingStatus = BookingStatus.APPROVED;
         itemOwner = userRepository.save(ownerWithoutId);
         booker = userRepository.save(bookerWithoutId);
-        item = itemRepository.save(Item.builder().owner(itemOwner).name("item").description("description").available(true).build());
+        item = itemRepository.save(Item.builder().owner(itemOwner).name("item").description("description")
+                .available(true).build());
         booking = bookingRepository.save(Booking.builder().booker(booker).status(BookingStatus.APPROVED)
                 .item(item).start(start).end(end).build());
     }
@@ -153,7 +154,8 @@ public class BookingRepositoryTest {
     @Test
     void findBookingByItemIdAndStartAfterAndStatusTest() {
         List<Booking> result = bookingRepository
-                .findBookingByItemIdAndStartAfterAndStatus(item.getId(), LocalDateTime.now(), bookingStatus, Sort.unsorted());
+                .findBookingByItemIdAndStartAfterAndStatus(item.getId(), LocalDateTime.now(), bookingStatus,
+                        Sort.unsorted());
         assertNotNull(result);
         assertFalse(result.isEmpty());
         assertEquals(booking, result.get(0));
@@ -169,7 +171,8 @@ public class BookingRepositoryTest {
 
     @Test
     void findBookingByItemIdAndBookerIdAndStatusAndStartBeforeTest() {
-        List<Booking> result = bookingRepository.findBookingByItemIdAndBookerIdAndStatusAndStartBefore(item.getId(), booker.getId(), bookingStatus, LocalDateTime.now().plusDays(3));
+        List<Booking> result = bookingRepository.findBookingByItemIdAndBookerIdAndStatusAndStartBefore(item.getId(),
+                booker.getId(), bookingStatus, LocalDateTime.now().plusDays(3));
         assertNotNull(result);
         assertFalse(result.isEmpty());
         assertEquals(booking, result.get(0));

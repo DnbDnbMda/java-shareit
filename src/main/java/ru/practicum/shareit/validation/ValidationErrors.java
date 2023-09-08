@@ -13,6 +13,4 @@ public class ValidationErrors {
     public static final String UNSUPPORTED_STATUS = "Unknown state: UNSUPPORTED_STATUS";
     public static final String INTERNAL_SERVER_ERROR = "Internal Server Error";
     public static final String BAD_REQUEST = "Bad Request";
-
-
 }

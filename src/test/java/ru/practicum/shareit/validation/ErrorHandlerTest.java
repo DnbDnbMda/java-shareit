@@ -14,7 +14,8 @@ public class ErrorHandlerTest {
 
     @Test
     public void handleUnsupportedStatusExceptionTest() {
-        UnsupportedStatusException e = new UnsupportedStatusException(HttpStatus.BAD_REQUEST, "Unknown state: UNSUPPORTED_STATUS");
+        UnsupportedStatusException e =
+                new UnsupportedStatusException(HttpStatus.BAD_REQUEST, "Unknown state: UNSUPPORTED_STATUS");
         ErrorResponse errorResponse = handler.handle(e);
         assertNotNull(errorResponse);
         assertEquals(errorResponse.getDescription(), "Unknown state: UNSUPPORTED_STATUS");
@@ -23,7 +24,8 @@ public class ErrorHandlerTest {
     @Test
     public void handleValidationsExceptionTest() {
         ValidationException e = new ValidationException(HttpStatus.NOT_FOUND, RESOURCE_NOT_FOUND);
-        ValidationException gottenException = assertThrows(ValidationException.class, () -> handler.handleValidationException(e));
+        ValidationException gottenException =
+                assertThrows(ValidationException.class, () -> handler.handleValidationException(e));
         assertNotNull(gottenException);
         assertEquals(gottenException.getMessage(), RESOURCE_NOT_FOUND);
     }

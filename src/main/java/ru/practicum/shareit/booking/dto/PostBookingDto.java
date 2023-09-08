@@ -27,5 +27,4 @@ public class PostBookingDto {
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
     private LocalDateTime end;
-
 }

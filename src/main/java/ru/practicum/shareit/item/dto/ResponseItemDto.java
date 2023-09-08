@@ -21,5 +21,4 @@ public class ResponseItemDto {
     private BookingReferencedDto nextBooking;
     private List<ResponseCommentDto> comments;
     private Integer requestId;
-
 }

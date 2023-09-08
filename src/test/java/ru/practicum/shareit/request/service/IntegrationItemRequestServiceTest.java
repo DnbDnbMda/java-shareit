@@ -35,13 +35,16 @@ public class IntegrationItemRequestServiceTest {
     void getForOwner() {
         User createdOwner = userService.createUser(ownerWithoutId);
         User createdRequestor = userService.createUser(requestorWithoutId);
-        itemService.addItem(PostItemDto.builder().name("item1").description("description1").available(true).build(), createdOwner.getId());
+        itemService.addItem(PostItemDto.builder().name("item1").description("description1")
+                .available(true).build(), createdOwner.getId());
         PostItemRequestDto postItemRequestDto = PostItemRequestDto.builder().description("request_descritpion").build();
         ItemRequest request = ItemRequestMapper.toItemRequest(postItemRequestDto);
         request = itemRequestService.createItemRequest(request, createdRequestor.getId());
 
-        ResponseItemRequestDto gottenItemRequest = itemRequestService.getById(request.getId(), createdRequestor.getId());
-        TypedQuery<ItemRequest> query = em.createQuery("Select i from requests i where i.id = :requestId", ItemRequest.class);
+        ResponseItemRequestDto gottenItemRequest =
+                itemRequestService.getById(request.getId(), createdRequestor.getId());
+        TypedQuery<ItemRequest> query =
+                em.createQuery("Select i from requests i where i.id = :requestId", ItemRequest.class);
         ItemRequest gottenItemRequestFromDB = query
                 .setParameter("requestId", request.getId())
                 .getSingleResult();

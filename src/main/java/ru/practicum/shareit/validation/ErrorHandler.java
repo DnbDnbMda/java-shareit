@@ -43,5 +43,4 @@ public class ErrorHandler {
         log.error(e.getMessage(), e);
         return new ErrorResponse(INTERNAL_SERVER_ERROR, e.getMessage());
     }
-
 }

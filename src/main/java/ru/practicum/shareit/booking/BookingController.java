@@ -55,7 +55,8 @@ public class BookingController {
     }
 
     @GetMapping
-    public Collection<ResponseBookingDto> getAllBookings(@RequestParam(value = "state", defaultValue = "ALL") BookingState state,
+    public Collection<ResponseBookingDto> getAllBookings(
+            @RequestParam(value = "state", defaultValue = "ALL") BookingState state,
                                                          @RequestHeader(USER_ID_HEADER) int userId,
                                                          @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
                                                          @PositiveOrZero int from,
@@ -67,7 +68,8 @@ public class BookingController {
     }
 
     @GetMapping("/owner")
-    public Collection<ResponseBookingDto> getAllBookingForOwner(@RequestParam(value = "state", defaultValue = "ALL") BookingState state,
+    public Collection<ResponseBookingDto> getAllBookingForOwner(
+            @RequestParam(value = "state", defaultValue = "ALL") BookingState state,
                                                                 @RequestHeader(USER_ID_HEADER) int ownerId,
                                                                 @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
                                                                 @PositiveOrZero int from,
@@ -77,5 +79,4 @@ public class BookingController {
         Collection<Booking> bookings = bookingService.getAllBookingForOwner(state, ownerId, from, size);
         return BookingMapper.toBookingReferencedDto(bookings);
     }
-
 }

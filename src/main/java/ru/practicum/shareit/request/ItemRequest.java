@@ -28,5 +28,4 @@ public class ItemRequest {
     @Column(name = "created", nullable = false)
     @CreationTimestamp
     private LocalDateTime created;
-
 }

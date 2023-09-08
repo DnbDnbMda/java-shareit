@@ -100,7 +100,8 @@ public class BookingControllerTest {
 
     @Test
     void getAllBookingsTest() throws Exception {
-        when(bookingService.getAllBookings(any(), any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(List.of(booking));
+        when(bookingService.getAllBookings(any(), any(Integer.class), any(Integer.class),
+                any(Integer.class))).thenReturn(List.of(booking));
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings?state={state}", state)
                         .content(mapper.writeValueAsString(booking))
@@ -117,7 +118,8 @@ public class BookingControllerTest {
 
     @Test
     void getAllBookingsTestWithPagination() throws Exception {
-        when(bookingService.getAllBookings(any(), any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(List.of(booking));
+        when(bookingService.getAllBookings(any(), any(Integer.class), any(Integer.class),
+                any(Integer.class))).thenReturn(List.of(booking));
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings?state={state}", state)
                         .content(mapper.writeValueAsString(booking))
@@ -134,7 +136,8 @@ public class BookingControllerTest {
 
     @Test
     void getAllBookingsForOwnerTest() throws Exception {
-        when(bookingService.getAllBookingForOwner(any(), any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(List.of(booking));
+        when(bookingService.getAllBookingForOwner(any(), any(Integer.class), any(Integer.class),
+                any(Integer.class))).thenReturn(List.of(booking));
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings/owner?state={state}", state)
                         .content(mapper.writeValueAsString(booking))
@@ -151,7 +154,8 @@ public class BookingControllerTest {
 
     @Test
     void getAllBookingsForOwnerWithPaginationTest() throws Exception {
-        when(bookingService.getAllBookingForOwner(any(), any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(List.of(booking));
+        when(bookingService.getAllBookingForOwner(any(), any(Integer.class), any(Integer.class),
+                any(Integer.class))).thenReturn(List.of(booking));
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings/owner?state={state}&from=0&size=10", state)
                         .content(mapper.writeValueAsString(booking))

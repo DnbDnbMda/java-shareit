@@ -19,5 +19,4 @@ public class UserDto {
     @Email(groups = {Create.class})
     @NotNull(groups = {Create.class})
     private String email;
-
 }

@@ -20,7 +20,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     public User getUser(int id) {
-        return userRepository.findById(id).orElseThrow(() -> new ValidationException(HttpStatus.NOT_FOUND, ValidationErrors.RESOURCE_NOT_FOUND));
+        return userRepository.findById(id).orElseThrow(() ->
+                new ValidationException(HttpStatus.NOT_FOUND, ValidationErrors.RESOURCE_NOT_FOUND));
     }
 
     @Override

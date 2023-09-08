@@ -50,7 +50,8 @@ public class Messages {
 
     public static String approveBooking(int bookingId, int userId, boolean approve) {
         if (approve) {
-            return String.format("Запрос на подтверждение бронирования: booking_id = %d, user_id = %d", bookingId, userId);
+            return String.format("Запрос на подтверждение бронирования: booking_id = %d, user_id = %d",
+                    bookingId, userId);
         } else {
             return String.format("Запрос на отклонение бронирования: booking_id = %d, user_id = %d", bookingId, userId);
         }
@@ -65,7 +66,8 @@ public class Messages {
     }
 
     public static String findAllBookingsForOwner(int ownerId, BookingState state) {
-        return String.format("Запрос на получение бронирований для всех вещей: owner_id = %d, state = %s", ownerId, state);
+        return String.format("Запрос на получение бронирований для всех вещей: owner_id = %d, state = %s", ownerId,
+                state);
     }
 
     public static String addComment(int itemId, int userId) {

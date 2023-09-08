@@ -39,5 +39,4 @@ public class CommentMapper {
         }
         return comments.stream().map(CommentMapper::toResponseCommentDto).collect(Collectors.toList());
     }
-
 }

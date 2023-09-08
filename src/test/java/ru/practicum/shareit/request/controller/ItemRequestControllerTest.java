@@ -84,7 +84,8 @@ public class ItemRequestControllerTest {
 
     @Test
     void getAllTest() throws Exception {
-        when(itemRequestService.getAll(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(List.of(responseItemRequestDto));
+        when(itemRequestService.getAll(any(Integer.class), any(Integer.class), any(Integer.class)))
+                .thenReturn(List.of(responseItemRequestDto));
         mvc.perform(get("/requests/all")
                         .header(USER_ID_HEADER, 1)
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -98,7 +99,8 @@ public class ItemRequestControllerTest {
 
     @Test
     void getAllWithPaginationTest() throws Exception {
-        when(itemRequestService.getAll(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(List.of(responseItemRequestDto));
+        when(itemRequestService.getAll(any(Integer.class), any(Integer.class), any(Integer.class)))
+                .thenReturn(List.of(responseItemRequestDto));
         mvc.perform(get("/requests/all?from=0&size=10")
                         .header(USER_ID_HEADER, 1)
                         .characterEncoding(StandardCharsets.UTF_8)

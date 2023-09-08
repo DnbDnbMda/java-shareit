@@ -58,5 +58,4 @@ public class ItemRequestController {
         log.info(Messages.getRequestById(requestId, userId));
         return itemRequestService.getById(requestId, userId);
     }
-
 }

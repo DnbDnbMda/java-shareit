@@ -58,7 +58,8 @@ public class ItemServiceTest {
         when(itemRequestRepository.findById(1)).thenReturn(Optional.of(request));
         when(itemRepository.save(any(Item.class))).thenReturn(item);
 
-        PostItemDto postItemDto = new PostItemDto(item.getId(), item.getName(), item.getDescription(), item.getAvailable(),
+        PostItemDto postItemDto = new PostItemDto(item.getId(), item.getName(), item.getDescription(),
+                item.getAvailable(),
                 request.getId());
         Item createdItem = itemService.addItem(postItemDto, 1);
 
@@ -92,9 +93,10 @@ public class ItemServiceTest {
                 .thenReturn(Optional.of(item));
         when(commentRepository.findByItemId(1))
                 .thenReturn(comments);
-        when(bookingRepository.findBookingByItemIdAndStartBefore(eq(1), any(LocalDateTime.class), eq(SORT_BY_START_DESC)))
-                .thenReturn(List.of(lastBooking));
-        when(bookingRepository.findBookingByItemIdAndStartAfterAndStatus(eq(1), any(LocalDateTime.class), eq(BookingStatus.APPROVED), eq(SORT_BY_START)))
+        when(bookingRepository.findBookingByItemIdAndStartBefore(eq(1), any(LocalDateTime.class),
+                eq(SORT_BY_START_DESC))).thenReturn(List.of(lastBooking));
+        when(bookingRepository.findBookingByItemIdAndStartAfterAndStatus(eq(1), any(LocalDateTime.class),
+                eq(BookingStatus.APPROVED), eq(SORT_BY_START)))
                 .thenReturn(List.of(nextBooking));
 
         ResponseItemDto gottenItemDto = itemService.getItemForUser(1, 1);
@@ -102,8 +104,10 @@ public class ItemServiceTest {
         assertNotNull(gottenItemDto);
         assertEquals(gottenItemDto, ItemMapper.toResponseItemDto(item, lastBooking, nextBooking, comments));
         verify(itemRepository, times(1)).findById(any(Integer.class));
-        verify(bookingRepository, times(1)).findBookingByItemIdAndStartBefore(eq(1), any(LocalDateTime.class), eq(SORT_BY_START_DESC));
-        verify(bookingRepository, times(1)).findBookingByItemIdAndStartAfterAndStatus(eq(1), any(LocalDateTime.class), eq(BookingStatus.APPROVED), eq(SORT_BY_START));
+        verify(bookingRepository, times(1)).findBookingByItemIdAndStartBefore(eq(1), any(LocalDateTime.class),
+                eq(SORT_BY_START_DESC));
+        verify(bookingRepository, times(1)).findBookingByItemIdAndStartAfterAndStatus(eq(1), any(LocalDateTime.class),
+                eq(BookingStatus.APPROVED), eq(SORT_BY_START));
     }
 
     @Test
@@ -112,10 +116,14 @@ public class ItemServiceTest {
         User user2 = new User(2, "user2", "user2@mail.com");
         Item item1 = Item.builder().id(1).name("item1").description("item_description1").owner(user2).build();
         Item item2 = Item.builder().id(1).name("item2").description("item_description2").owner(user2).build();
-        Booking lastBooking1 = Booking.builder().id(1).item(item1).booker(user1).start(LocalDateTime.now().minusDays(1)).build();
-        Booking nextBooking1 = Booking.builder().id(2).item(item1).booker(user1).start(LocalDateTime.now().plusDays(1)).build();
-        Booking lastBooking2 = Booking.builder().id(3).item(item2).booker(user1).start(LocalDateTime.now().minusDays(1)).build();
-        Booking nextBooking2 = Booking.builder().id(4).item(item2).booker(user1).start(LocalDateTime.now().plusDays(1)).build();
+        Booking lastBooking1 =
+                Booking.builder().id(1).item(item1).booker(user1).start(LocalDateTime.now().minusDays(1)).build();
+        Booking nextBooking1 =
+                Booking.builder().id(2).item(item1).booker(user1).start(LocalDateTime.now().plusDays(1)).build();
+        Booking lastBooking2 =
+                Booking.builder().id(3).item(item2).booker(user1).start(LocalDateTime.now().minusDays(1)).build();
+        Booking nextBooking2 =
+                Booking.builder().id(4).item(item2).booker(user1).start(LocalDateTime.now().plusDays(1)).build();
 
         List<Comment> comments = List.of(new Comment(1, "text", item1, user1, LocalDateTime.now()));
 
@@ -128,12 +136,14 @@ public class ItemServiceTest {
                 .thenReturn(comments);
 
         Collection<ResponseItemDto> result = itemService.getAll(1, 0, 20);
-        ResponseItemDto itemDto1 = ResponseItemDto.builder().id(item1.getId()).name(item1.getName()).description(item1.getDescription())
+        ResponseItemDto itemDto1 = ResponseItemDto.builder().id(item1.getId())
+                .name(item1.getName()).description(item1.getDescription())
                 .lastBooking(BookingMapper.toBookingReferencedDto(lastBooking1))
                 .nextBooking(BookingMapper.toBookingReferencedDto(nextBooking1))
                 .comments(CommentMapper.toResponseCommentDto(comments))
                 .build();
-        ResponseItemDto itemDto2 = ResponseItemDto.builder().id(item2.getId()).name(item2.getName()).description(item2.getDescription())
+        ResponseItemDto itemDto2 = ResponseItemDto.builder().id(item2.getId())
+                .name(item2.getName()).description(item2.getDescription())
                 .lastBooking(BookingMapper.toBookingReferencedDto(lastBooking2))
                 .nextBooking(BookingMapper.toBookingReferencedDto(nextBooking2))
                 .build();
@@ -159,7 +169,8 @@ public class ItemServiceTest {
         verify(itemRepository, times(1)).search(text, page);
         assertNotNull(result);
         assertEquals(1, result.size());
-        ResponseItemDto itemDto = ResponseItemDto.builder().id(item.getId()).name(item.getName()).description(item.getDescription())
+        ResponseItemDto itemDto = ResponseItemDto.builder().id(item.getId())
+                .name(item.getName()).description(item.getDescription())
                 .available(item.getAvailable()).requestId(item.getItemRequest().getId()).build();
         assertTrue(result.contains(itemDto));
     }
@@ -170,7 +181,8 @@ public class ItemServiceTest {
         Comment comment = Comment.builder().id(1).text("text").author(booker).item(item).created(now).build();
         when(userRepository.findById(1)).thenReturn(Optional.of(booker));
         when(itemRepository.findById(any(Integer.class))).thenReturn(Optional.of(item));
-        when(bookingRepository.findBookingByItemIdAndBookerIdAndStatusAndStartBefore(eq(1), eq(1), eq(BookingStatus.APPROVED), any(LocalDateTime.class)))
+        when(bookingRepository.findBookingByItemIdAndBookerIdAndStatusAndStartBefore(eq(1), eq(1),
+                eq(BookingStatus.APPROVED), any(LocalDateTime.class)))
                 .thenReturn(List.of(booking));
         when(commentRepository.save(any(Comment.class)))
                 .thenReturn(comment);
@@ -179,7 +191,8 @@ public class ItemServiceTest {
         ResponseCommentDto result = itemService.createComment(commentDto, 1, 1);
 
         assertNotNull(result);
-        ResponseCommentDto dto = ResponseCommentDto.builder().id(1).text("text").authorName(booker.getName()).created(now).build();
+        ResponseCommentDto dto = ResponseCommentDto.builder().id(1).text("text")
+                .authorName(booker.getName()).created(now).build();
         assertEquals(result, dto);
     }
 }

@@ -27,13 +27,13 @@ import java.util.List;
 import static ru.practicum.shareit.utils.Sorts.SORT_BY_START_DESC;
 import static ru.practicum.shareit.validation.ValidationErrors.*;
 
-@RequiredArgsConstructor
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class BookingServiceImpl implements BookingService {
 
-    private final BookingRepository bookingRepository;
     private final ItemRepository itemRepository;
+    private final BookingRepository bookingRepository;
     private final UserRepository userRepository;
 
     @Override
@@ -45,7 +45,8 @@ public class BookingServiceImpl implements BookingService {
         if (!item.getAvailable()) {
             throw new ValidationException(HttpStatus.BAD_REQUEST, ITEM_UNAVAILABLE);
         }
-        if (postBookingDto.getStart().isAfter(postBookingDto.getEnd()) || postBookingDto.getStart().isEqual(postBookingDto.getEnd())) {
+        if (postBookingDto.getStart().isAfter(postBookingDto.getEnd()) ||
+                postBookingDto.getStart().isEqual(postBookingDto.getEnd())) {
             throw new ValidationException(HttpStatus.BAD_REQUEST, INVALID_TIME);
         }
         User user = findUser(userId);
@@ -69,7 +70,8 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional(readOnly = true)
     public Booking getBookingById(int bookingId) {
-        return bookingRepository.findById(bookingId).orElseThrow(() -> new ValidationException(HttpStatus.NOT_FOUND, RESOURCE_NOT_FOUND));
+        return bookingRepository.findById(bookingId).orElseThrow(()
+                -> new ValidationException(HttpStatus.NOT_FOUND, RESOURCE_NOT_FOUND));
     }
 
     @Override
@@ -132,12 +134,13 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
-    private Item findItem(int itemId) {
-        return itemRepository.findById(itemId).orElseThrow(() -> new ValidationException(HttpStatus.NOT_FOUND, RESOURCE_NOT_FOUND));
-    }
-
     private User findUser(int userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new ValidationException(HttpStatus.NOT_FOUND, ValidationErrors.RESOURCE_NOT_FOUND));
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ValidationException(HttpStatus.NOT_FOUND, ValidationErrors.RESOURCE_NOT_FOUND));
     }
 
+    private Item findItem(int itemId) {
+        return itemRepository.findById(itemId)
+                .orElseThrow(() -> new ValidationException(HttpStatus.NOT_FOUND, RESOURCE_NOT_FOUND));
+    }
 }

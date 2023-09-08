@@ -9,9 +9,9 @@ import ru.practicum.shareit.user.dto.UserDto;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @Builder
+@Setter
+@Getter
 public class ResponseBookingDto {
 
     private int id;

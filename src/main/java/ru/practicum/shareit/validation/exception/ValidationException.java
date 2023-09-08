@@ -15,5 +15,4 @@ public class ValidationException extends ResponseStatusException {
     public String getMessage() {
         return message;
     }
-
 }

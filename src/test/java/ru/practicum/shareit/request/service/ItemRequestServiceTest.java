@@ -54,9 +54,11 @@ public class ItemRequestServiceTest {
     @Test
     void getForOwnerTest() {
         when(userRepository.findById(requestor.getId())).thenReturn(Optional.of(requestor));
-        ItemRequest request = ItemRequest.builder().id(1).description("request_description").requestor(requestor).build();
+        ItemRequest request = ItemRequest.builder().id(1).description("request_description")
+                .requestor(requestor).build();
         List<ItemRequest> requests = List.of(request);
-        Item item1 = Item.builder().id(1).name("item_name1").description("item_description1").available(true).itemRequest(request).build();
+        Item item1 = Item.builder().id(1).name("item_name1").description("item_description1")
+                .available(true).itemRequest(request).build();
         List<Item> items = List.of(item1);
         when(itemRequestRepository.findRequestByRequestorIdOrderByCreatedDesc(requestor.getId())).thenReturn(requests);
         when(itemRepository.findAllByRequestIdIn(requests)).thenReturn(items);
@@ -79,12 +81,15 @@ public class ItemRequestServiceTest {
         User requestor = new User(2, "user2", "user2@mail.com");
         User user = new User(1, "user1", "user1@mail.com");
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        ItemRequest request = ItemRequest.builder().id(1).description("request_description").requestor(requestor).build();
-        Item item1 = Item.builder().id(1).name("item_name1").description("item_description1").available(true).itemRequest(request).build();
+        ItemRequest request = ItemRequest.builder().id(1).description("request_description")
+                .requestor(requestor).build();
+        Item item1 = Item.builder().id(1).name("item_name1").description("item_description1")
+                .available(true).itemRequest(request).build();
         List<Item> items = List.of(item1);
         List<ItemRequest> requests = List.of(request);
         Page<ItemRequest> requestsPage = new PageImpl<>(requests);
-        when(itemRequestRepository.findAllForUser(eq(user.getId()), any(Pageable.class))).thenReturn(requestsPage);
+        when(itemRequestRepository.findAllForUser(eq(user.getId()), any(Pageable.class)))
+                .thenReturn(requestsPage);
         when(itemRepository.findAllByRequestIdIn(requests)).thenReturn(items);
 
         ResponseItemRequestDto responseItemRequestDto = ResponseItemRequestDto.builder()
@@ -104,10 +109,12 @@ public class ItemRequestServiceTest {
     void findByIdTest() {
         User user = new User(1, "user1", "user1@mail.com");
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        ItemRequest request = ItemRequest.builder().id(1).description("request_description").requestor(user).build();
+        ItemRequest request = ItemRequest.builder().id(1).description("request_description")
+                .requestor(user).build();
         when(itemRequestRepository.findById(request.getId())).thenReturn(Optional.of(request));
 
-        Item item1 = Item.builder().id(1).name("item_name1").description("item_description1").available(true).itemRequest(request).build();
+        Item item1 = Item.builder().id(1).name("item_name1").description("item_description1")
+                .available(true).itemRequest(request).build();
         List<Item> items = List.of(item1);
         when(itemRepository.findAllByItemRequest(request)).thenReturn(items);
 

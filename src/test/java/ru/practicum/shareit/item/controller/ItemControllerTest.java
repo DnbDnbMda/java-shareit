@@ -52,9 +52,11 @@ public class ItemControllerTest {
                 .build();
         mapper.registerModule(new JavaTimeModule());
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        postItemDto = PostItemDto.builder().id(item.getId()).name(item.getName()).description(item.getDescription())
+        postItemDto = PostItemDto.builder().id(item.getId()).name(item.getName())
+                .description(item.getDescription())
                 .available(item.getAvailable()).requestId(item.getItemRequest().getId()).build();
-        responseItemDto = ResponseItemDto.builder().id(item.getId()).name(item.getName()).description(item.getDescription())
+        responseItemDto = ResponseItemDto.builder().id(item.getId()).name(item.getName())
+                .description(item.getDescription())
                 .available(item.getAvailable()).requestId(item.getItemRequest().getId()).build();
     }
 
@@ -144,7 +146,8 @@ public class ItemControllerTest {
 
     @Test
     void getAllItemsOwnerWithPagination() throws Exception {
-        when(itemService.getAll(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(List.of(responseItemDto));
+        when(itemService.getAll(any(Integer.class), any(Integer.class), any(Integer.class)))
+                .thenReturn(List.of(responseItemDto));
         mvc.perform(get("/items?from=0&size=20")
                         .header(USER_ID_HEADER, 1)
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -176,7 +179,8 @@ public class ItemControllerTest {
 
     @Test
     void searchItemByTextTestWithPagination() throws Exception {
-        when(itemService.findItemsByText(any(), any(Integer.class), any(Integer.class))).thenReturn(List.of(responseItemDto));
+        when(itemService.findItemsByText(any(), any(Integer.class), any(Integer.class)))
+                .thenReturn(List.of(responseItemDto));
         mvc.perform(get("/items/search?text=text&from=0&size=20")
                         .header(USER_ID_HEADER, 1)
                         .characterEncoding(StandardCharsets.UTF_8)
