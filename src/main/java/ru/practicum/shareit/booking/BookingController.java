@@ -17,8 +17,8 @@ import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
 import java.util.List;
 
-import static ru.practicum.shareit.utils.Constants.DEFAULT_FROM_VALUE;
-import static ru.practicum.shareit.utils.Constants.DEFAULT_SIZE_VALUE;
+//мдау import static ru.practicum.shareit.utils.Constants.DEFAULT_FROM_VALUE;
+//мдау import static ru.practicum.shareit.utils.Constants.DEFAULT_SIZE_VALUE;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -57,9 +57,9 @@ public class BookingController {
     public Collection<ResponseBookingDto> getAllBookings(
             @RequestParam(value = "state", defaultValue = "ALL") BookingState state,
                                                          @RequestHeader("${USER_ID_HEADER}") int userId,
-                                                         @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
+                                                         @RequestParam(defaultValue = "${DEFAULT_FROM_VALUE}")
                                                          @PositiveOrZero int from,
-                                                         @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
+                                                         @RequestParam(defaultValue = "${DEFAULT_SIZE_VALUE}")
                                                          @Positive int size) {
         log.info(Messages.findAllBookings(state, userId));
         List<Booking> bookings = bookingService.getAllBookings(state, userId, from, size);
@@ -70,9 +70,9 @@ public class BookingController {
     public Collection<ResponseBookingDto> getAllBookingForOwner(
             @RequestParam(value = "state", defaultValue = "ALL") BookingState state,
                                                                 @RequestHeader("${USER_ID_HEADER}") int ownerId,
-                                                                @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
+                                                                @RequestParam(defaultValue = "${DEFAULT_FROM_VALUE}")
                                                                 @PositiveOrZero int from,
-                                                                @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
+                                                                @RequestParam(defaultValue = "${DEFAULT_SIZE_VALUE}")
                                                                 @Positive int size) {
         log.info(Messages.findAllBookingsForOwner(ownerId, state));
         Collection<Booking> bookings = bookingService.getAllBookingForOwner(state, ownerId, from, size);

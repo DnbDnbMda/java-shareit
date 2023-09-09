@@ -49,9 +49,9 @@ public class ItemController {
 
     @GetMapping
     public Collection<ResponseItemDto> getAll(@RequestHeader("${USER_ID_HEADER}") int userId,
-                                              @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
+                                              @RequestParam(defaultValue = "${DEFAULT_FROM_VALUE}")
                                               @PositiveOrZero int from,
-                                              @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
+                                              @RequestParam(defaultValue = "${DEFAULT_SIZE_VALUE}")
                                               @Positive int size) {
         log.info(Messages.getAllItems(userId));
         return itemService.getAll(userId, from, size);
@@ -65,9 +65,9 @@ public class ItemController {
 
     @GetMapping("/search")
     public Collection<ResponseItemDto> findItemsByText(@RequestParam String text,
-                                                       @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
+                                                       @RequestParam(defaultValue = "${DEFAULT_FROM_VALUE}")
                                                        @PositiveOrZero int from,
-                                                       @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
+                                                       @RequestParam(defaultValue = "${DEFAULT_SIZE_VALUE}")
                                                        @Positive int size) {
         log.info(Messages.findItems(text));
         return itemService.findItemsByText(text, from, size);

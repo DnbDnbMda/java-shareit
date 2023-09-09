@@ -14,8 +14,8 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
-import static ru.practicum.shareit.utils.Constants.DEFAULT_FROM_VALUE;
-import static ru.practicum.shareit.utils.Constants.DEFAULT_SIZE_VALUE;
+//мдау import static ru.practicum.shareit.utils.Constants.DEFAULT_FROM_VALUE;
+//мдау import static ru.practicum.shareit.utils.Constants.DEFAULT_SIZE_VALUE;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -42,9 +42,9 @@ public class ItemRequestController {
     }
 
     @GetMapping("/all")
-    public List<ResponseItemRequestDto> getAll(@RequestParam(defaultValue = DEFAULT_FROM_VALUE)
+    public List<ResponseItemRequestDto> getAll(@RequestParam(defaultValue = "${DEFAULT_FROM_VALUE}")
                                                @PositiveOrZero int from,
-                                               @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
+                                               @RequestParam(defaultValue = "${DEFAULT_SIZE_VALUE}")
                                                @Positive int size,
                                                @RequestHeader("${USER_ID_HEADER}") int userId) {
         log.info(Messages.getAllRequestForUser(userId));
