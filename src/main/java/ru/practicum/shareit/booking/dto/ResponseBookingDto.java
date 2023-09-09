@@ -8,8 +8,6 @@ import ru.practicum.shareit.user.dto.UserDto;
 import java.time.LocalDateTime;
 
 @Builder
-//мдау@Setter
-//мдау@Getter
 @Data
 public class ResponseBookingDto {
 

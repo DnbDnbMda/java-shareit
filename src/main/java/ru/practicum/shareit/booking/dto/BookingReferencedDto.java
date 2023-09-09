@@ -5,11 +5,8 @@ import ru.practicum.shareit.booking.model.BookingStatus;
 
 import java.time.LocalDateTime;
 
-//мдау@Getter
-//мдау@Setter
 @Builder
 @Data
-//мдау@EqualsAndHashCode
 public class BookingReferencedDto {
 
     private int id;

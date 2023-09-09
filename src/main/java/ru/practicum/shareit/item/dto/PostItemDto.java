@@ -8,10 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
-//мдау@Getter
-//мдау@Setter
 @Builder
-//мдау@ToString
 @Data
 public class PostItemDto {
 

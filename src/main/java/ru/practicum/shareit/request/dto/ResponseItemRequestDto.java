@@ -7,11 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//мдау@Getter
-//мдау@Setter
 @Builder
-//мдау@EqualsAndHashCode
-//мдау@ToString
 @Data
 public class ResponseItemRequestDto {
 

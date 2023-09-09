@@ -6,11 +6,7 @@ import ru.practicum.shareit.booking.dto.BookingReferencedDto;
 import java.util.List;
 
 @AllArgsConstructor
-//мдау@Getter
-//мдау@Setter
 @Builder
-//мдау@EqualsAndHashCode
-//мдау@ToString
 @Data
 public class ResponseItemDto {
 

@@ -8,8 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-//мдау@Getter
-//мдау@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

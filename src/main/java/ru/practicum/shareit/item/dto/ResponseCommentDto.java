@@ -5,9 +5,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Builder
-//мдау@EqualsAndHashCode
-//мдау@Getter
-//мдау@ToString
 @Data
 public class ResponseCommentDto {
 

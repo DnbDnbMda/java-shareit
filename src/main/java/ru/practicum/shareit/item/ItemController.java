@@ -19,8 +19,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
 
-import static ru.practicum.shareit.utils.Constants.*;
-
 @Slf4j
 @Validated
 @RestController

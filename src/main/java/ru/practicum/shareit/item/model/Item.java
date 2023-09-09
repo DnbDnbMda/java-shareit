@@ -6,11 +6,7 @@ import ru.practicum.shareit.user.model.User;
 
 import javax.persistence.*;
 
-//мдау@Getter
-//мдау@Setter
-//мдау@ToString
 @Builder
-//мдау@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "items")

@@ -8,12 +8,6 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-//мдау import static ru.practicum.shareit.utils.Constants.DATE_PATTERN;
-
-//мдау@Getter
-//мдау@Setter
-//мдау@ToString
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

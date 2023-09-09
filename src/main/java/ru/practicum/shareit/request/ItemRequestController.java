@@ -14,9 +14,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
-//import static ru.practicum.shareit.utils.Constants.DEFAULT_FROM_VALUE;
-//мдау import static ru.practicum.shareit.utils.Constants.DEFAULT_SIZE_VALUE;
-
 @Slf4j
 @RequiredArgsConstructor
 @RestController
