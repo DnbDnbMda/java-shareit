@@ -23,10 +23,10 @@ public class PostBookingDto {
     private int itemId;
     @FutureOrPresent
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "${datepattern}")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime start;
     @Future
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "${datepattern}")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime end;
 }
