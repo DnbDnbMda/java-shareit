@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class ItemMapper {
 
-    public ResponseItemDto toResponseItemDto(Item item, Booking last, Booking next, List<Comment> comments) {
+    public static ResponseItemDto toResponseItemDto(Item item, Booking last, Booking next, List<Comment> comments) {
         return ResponseItemDto.builder()
                 .id(item.getId())
                 .name(item.getName())
@@ -30,7 +30,7 @@ public class ItemMapper {
                 .build();
     }
 
-    public Item toItem(PostItemDto postItemDto, int itemId) {
+    public static Item toItem(PostItemDto postItemDto, int itemId) {
         return Item.builder()
                 .name(postItemDto.getName())
                 .description(postItemDto.getDescription())
@@ -39,7 +39,7 @@ public class ItemMapper {
                 .build();
     }
 
-    public Item toItem(PostItemDto postItemDto) {
+    public static Item toItem(PostItemDto postItemDto) {
         return Item.builder()
                 .name(postItemDto.getName())
                 .description(postItemDto.getDescription())
@@ -47,16 +47,16 @@ public class ItemMapper {
                 .build();
     }
 
-    public PostItemDto toItemDto(Item item) {
+    public static PostItemDto toItemDto(Item item) {
         return new PostItemDto(item.getId(), item.getName(), item.getDescription(), item.getAvailable(),
                 item.getItemRequest() == null ? null : item.getItemRequest().getId());
     }
 
-    public Collection<PostItemDto> toItemDto(Collection<Item> items) {
+    public static Collection<PostItemDto> toItemDto(Collection<Item> items) {
         return items.stream().map(ItemMapper::toItemDto).collect(Collectors.toList());
     }
 
-    public ItemRequestDto toItemForRequestDto(Item item) {
+    public static ItemRequestDto toItemForRequestDto(Item item) {
         return ItemRequestDto.builder()
                 .id(item.getId())
                 .name(item.getName())
@@ -66,11 +66,10 @@ public class ItemMapper {
                 .build();
     }
 
-    public List<ItemRequestDto> toItemForRequestDto(List<Item> items) {
+    public static List<ItemRequestDto> toItemForRequestDto(List<Item> items) {
         if (items == null) {
             return Collections.EMPTY_LIST;
         }
         return items.stream().map(ItemMapper::toItemForRequestDto).collect(Collectors.toList());
     }
-
 }
