@@ -32,7 +32,7 @@ public class ItemController {
 
     @PostMapping
     public PostItemDto add(@Validated({Create.class}) @RequestBody PostItemDto postItemDto,
-                           @RequestHeader(USER_ID_HEADER) int userId) {
+                           @RequestHeader("${USER_ID_HEADER}") int userId) {
         log.info(Messages.addItem());
         Item item = itemService.addItem(postItemDto, userId);
         return ItemMapper.toItemDto(item);
@@ -41,14 +41,14 @@ public class ItemController {
     @PatchMapping("{id}")
     public PostItemDto update(@Validated({Update.class}) @RequestBody PostItemDto postItemDto,
                               @PathVariable("id") int itemId,
-                              @RequestHeader(USER_ID_HEADER) int ownerId) {
+                              @RequestHeader("${USER_ID_HEADER}") int ownerId) {
         log.info(Messages.updateItem(postItemDto.getId()));
         Item item = itemService.updateItem(ItemMapper.toItem(postItemDto, itemId), ownerId);
         return ItemMapper.toItemDto(item);
     }
 
     @GetMapping
-    public Collection<ResponseItemDto> getAll(@RequestHeader(USER_ID_HEADER) int userId,
+    public Collection<ResponseItemDto> getAll(@RequestHeader("${USER_ID_HEADER}") int userId,
                                               @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
                                               @PositiveOrZero int from,
                                               @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
@@ -58,7 +58,7 @@ public class ItemController {
     }
 
     @GetMapping("{id}")
-    public ResponseItemDto get(@PathVariable("id") int itemId, @RequestHeader(USER_ID_HEADER) int userId) {
+    public ResponseItemDto get(@PathVariable("id") int itemId, @RequestHeader("${USER_ID_HEADER}") int userId) {
         log.info(Messages.getItem(itemId));
         return itemService.getItemForUser(itemId, userId);
     }
@@ -76,7 +76,7 @@ public class ItemController {
     @PostMapping("/{itemId}/comment")
     public ResponseCommentDto addComment(@Valid @RequestBody CommentDto commentDto,
                                          @PathVariable int itemId,
-                                         @RequestHeader(USER_ID_HEADER) int userId) {
+                                         @RequestHeader("${USER_ID_HEADER}") int userId) {
         log.info(Messages.addComment(itemId, userId));
         return itemService.createComment(commentDto, itemId, userId);
     }

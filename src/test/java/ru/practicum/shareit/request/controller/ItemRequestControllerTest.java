@@ -29,7 +29,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.practicum.shareit.TestUtils.request;
-import static ru.practicum.shareit.utils.Constants.USER_ID_HEADER;
 
 @ExtendWith(MockitoExtension.class)
 public class ItemRequestControllerTest {
@@ -58,7 +57,7 @@ public class ItemRequestControllerTest {
         when(itemRequestService.createItemRequest(any(), any(Integer.class))).thenReturn(request);
         mvc.perform(post("/requests")
                         .content(mapper.writeValueAsString(request))
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -72,7 +71,7 @@ public class ItemRequestControllerTest {
     void getItemRequestForUserTest() throws Exception {
         when(itemRequestService.getForOwner(any(Integer.class))).thenReturn(List.of(responseItemRequestDto));
         mvc.perform(get("/requests")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -87,7 +86,7 @@ public class ItemRequestControllerTest {
         when(itemRequestService.getAll(any(Integer.class), any(Integer.class), any(Integer.class)))
                 .thenReturn(List.of(responseItemRequestDto));
         mvc.perform(get("/requests/all")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -102,7 +101,7 @@ public class ItemRequestControllerTest {
         when(itemRequestService.getAll(any(Integer.class), any(Integer.class), any(Integer.class)))
                 .thenReturn(List.of(responseItemRequestDto));
         mvc.perform(get("/requests/all?from=0&size=10")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -116,7 +115,7 @@ public class ItemRequestControllerTest {
     void getByIdTest() throws Exception {
         when(itemRequestService.getById(any(Integer.class), any(Integer.class))).thenReturn(responseItemRequestDto);
         mvc.perform(get("/requests/1")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

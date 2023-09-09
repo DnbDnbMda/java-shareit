@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.practicum.shareit.TestUtils.item;
-import static ru.practicum.shareit.utils.Constants.USER_ID_HEADER;
 
 @ExtendWith(MockitoExtension.class)
 public class ItemControllerTest {
@@ -65,7 +64,7 @@ public class ItemControllerTest {
         when(itemService.addItem(any(), any(Integer.class))).thenReturn(item);
         mvc.perform(post("/items")
                         .content(mapper.writeValueAsString(postItemDto))
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -85,7 +84,7 @@ public class ItemControllerTest {
         when(itemService.createComment(any(), any(Integer.class), any(Integer.class))).thenReturn(commentResponseDto);
         mvc.perform(post("/items/1/comment")
                         .content(mapper.writeValueAsString(comment))
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -100,7 +99,7 @@ public class ItemControllerTest {
         when(itemService.updateItem(any(), any(Integer.class))).thenReturn(item);
         mvc.perform(patch("/items/1")
                         .content(mapper.writeValueAsString(postItemDto))
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -116,7 +115,7 @@ public class ItemControllerTest {
     void getItemByIdTest() throws Exception {
         when(itemService.getItemForUser(any(Integer.class), any(Integer.class))).thenReturn(responseItemDto);
         mvc.perform(get("/items/1")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -132,7 +131,7 @@ public class ItemControllerTest {
     void getAllItemsOwnerTest() throws Exception {
         when(itemService.getAll(any(Integer.class), eq(0), eq(20))).thenReturn(List.of(responseItemDto));
         mvc.perform(get("/items")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -149,7 +148,7 @@ public class ItemControllerTest {
         when(itemService.getAll(any(Integer.class), any(Integer.class), any(Integer.class)))
                 .thenReturn(List.of(responseItemDto));
         mvc.perform(get("/items?from=0&size=20")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -165,7 +164,7 @@ public class ItemControllerTest {
     void searchItemByTextTest() throws Exception {
         when(itemService.findItemsByText(any(), eq(0), eq(20))).thenReturn(List.of(responseItemDto));
         mvc.perform(get("/items/search?text=text")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -182,7 +181,7 @@ public class ItemControllerTest {
         when(itemService.findItemsByText(any(), any(Integer.class), any(Integer.class)))
                 .thenReturn(List.of(responseItemDto));
         mvc.perform(get("/items/search?text=text&from=0&size=20")
-                        .header(USER_ID_HEADER, 1)
+                        .header("${USER_ID_HEADER}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
