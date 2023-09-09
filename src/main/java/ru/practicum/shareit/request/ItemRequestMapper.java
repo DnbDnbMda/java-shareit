@@ -12,14 +12,14 @@ import java.util.List;
 @UtilityClass
 public class ItemRequestMapper {
 
-    public ItemRequest toItemRequest(PostItemRequestDto postItemRequestDto) {
+    public static ItemRequest toItemRequest(PostItemRequestDto postItemRequestDto) {
         return ItemRequest.builder()
                 .description(postItemRequestDto.getDescription())
                 .created(LocalDateTime.now())
                 .build();
     }
 
-    public ResponseItemRequestDto toResponseItemRequestDto(ItemRequest request) {
+    public static ResponseItemRequestDto toResponseItemRequestDto(ItemRequest request) {
         return ResponseItemRequestDto.builder()
                 .id(request.getId())
                 .description(request.getDescription())
@@ -27,7 +27,7 @@ public class ItemRequestMapper {
                 .build();
     }
 
-    public ResponseItemRequestDto toResponseItemRequestDto(ItemRequest request, List<Item> items) {
+    public static ResponseItemRequestDto toResponseItemRequestDto(ItemRequest request, List<Item> items) {
         return ResponseItemRequestDto.builder()
                 .id(request.getId())
                 .description(request.getDescription())
