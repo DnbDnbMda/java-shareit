@@ -4,11 +4,12 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
-@Getter
-@Setter
+//мдау@Getter
+//мдау@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class CommentDto {
 
     @NotBlank

@@ -6,14 +6,15 @@ import ru.practicum.shareit.user.model.User;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@ToString
+//мдау@Getter
+//мдау@Setter
+//мдау@ToString
 @Builder
-@EqualsAndHashCode
+//мдау@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "items")
+@Data
 public class Item {
 
     @Id

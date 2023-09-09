@@ -3,10 +3,11 @@ package ru.practicum.shareit.item.dto;
 import lombok.*;
 
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+//мдау@Getter
+//мдау@Setter
+//мдау@EqualsAndHashCode
+//мдау@ToString
+@Data
 public class ItemRequestDto {
 
     private int id;
