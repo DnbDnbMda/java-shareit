@@ -7,14 +7,15 @@ import ru.practicum.shareit.user.model.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+//мдау@Getter
+//мдау@Setter
+//мдау@EqualsAndHashCode
 @Builder
 @Entity(name = "bookings")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//мдау@ToString
+@Data
 public class Booking {
 
     @Id

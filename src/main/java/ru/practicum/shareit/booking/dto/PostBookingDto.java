@@ -10,12 +10,14 @@ import java.time.LocalDateTime;
 
 import static ru.practicum.shareit.utils.Constants.DATE_PATTERN;
 
-@Getter
-@Setter
+//мдау@Getter
+//мдау@Setter
+//мдау@ToString
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Data
 public class PostBookingDto {
 
     private int itemId;
