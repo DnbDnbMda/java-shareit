@@ -8,7 +8,7 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-import static ru.practicum.shareit.utils.Constants.DATE_PATTERN;
+//мдау import static ru.practicum.shareit.utils.Constants.DATE_PATTERN;
 
 //мдау@Getter
 //мдау@Setter
@@ -23,10 +23,10 @@ public class PostBookingDto {
     private int itemId;
     @FutureOrPresent
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "${datepattern}")
     private LocalDateTime start;
     @Future
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_PATTERN)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "${datepattern}")
     private LocalDateTime end;
 }

@@ -58,7 +58,7 @@ public class BookingControllerTest {
         when(bookingService.addBooking(any(), any(Integer.class))).thenReturn(booking);
         mvc.perform(post("/bookings")
                         .content(mapper.writeValueAsString(postBookingDto))
-                        .header("${USER_ID_HEADER}", booker.getId())
+                        .header("${useridheader}", booker.getId())
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -75,7 +75,7 @@ public class BookingControllerTest {
                 .thenReturn(booking);
         mvc.perform(patch("/bookings/1")
                         .param("approved", "true")
-                        .header("${USER_ID_HEADER}", owner.getId()))
+                        .header("${useridheader}", owner.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(responseBookingDto.getId()), Integer.class))
                 .andExpect(jsonPath("$.start", is(notNullValue())))
@@ -89,7 +89,7 @@ public class BookingControllerTest {
                 .thenReturn(booking);
 
         mvc.perform(get("/bookings/1")
-                        .header("${USER_ID_HEADER}", booker.getId()))
+                        .header("${useridheader}", booker.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(responseBookingDto.getId()), Integer.class))
                 .andExpect(jsonPath("$.start", is(notNullValue())))
@@ -104,7 +104,7 @@ public class BookingControllerTest {
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings?state={state}", state)
                         .content(mapper.writeValueAsString(booking))
-                        .header("${USER_ID_HEADER}", 1)
+                        .header("${useridheader}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -122,7 +122,7 @@ public class BookingControllerTest {
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings?state={state}", state)
                         .content(mapper.writeValueAsString(booking))
-                        .header("${USER_ID_HEADER}", 1)
+                        .header("${useridheader}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -140,7 +140,7 @@ public class BookingControllerTest {
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings/owner?state={state}", state)
                         .content(mapper.writeValueAsString(booking))
-                        .header("${USER_ID_HEADER}", 1)
+                        .header("${useridheader}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -158,7 +158,7 @@ public class BookingControllerTest {
         BookingState state = BookingState.ALL;
         mvc.perform(get("/bookings/owner?state={state}&from=0&size=10", state)
                         .content(mapper.writeValueAsString(booking))
-                        .header("${USER_ID_HEADER}", 1)
+                        .header("${useridheader}", 1)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
