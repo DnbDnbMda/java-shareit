@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+//мдау@Getter
+//мдау@Setter
 @Builder
-@EqualsAndHashCode
-@ToString
+//мдау@EqualsAndHashCode
+//мдау@ToString
+@Data
 public class ResponseItemRequestDto {
 
     private int id;

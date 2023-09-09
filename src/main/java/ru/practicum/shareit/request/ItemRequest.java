@@ -8,12 +8,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+//мдау@Getter
+//мдау@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "requests")
+@Data
 public class ItemRequest {
 
     @Id
