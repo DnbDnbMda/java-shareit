@@ -4,14 +4,15 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+//мдау@Getter
+//мдау@Setter
+//мдау@EqualsAndHashCode
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+//мдау@ToString
 @Entity(name = "users")
+@Data
 public class User {
 
     @Id
