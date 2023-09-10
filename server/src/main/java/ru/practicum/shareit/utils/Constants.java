@@ -4,8 +4,9 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Constants {
-
-    //mdad public static final String USER_ID_HEADER = "X-Sharer-User-Id";
+    //В итоге решил оставить исходный вариант с константами, потому что с application.properties постоянно
+    //какие-то ошибки.
+    public static final String USER_ID_HEADER = "X-Sharer-User-Id";
     public static final int DEFAULT_FROM_INT = 0;
     public static final String DEFAULT_FROM_VALUE = "0";
     public static final int DEFAULT_SIZE_INT = 20;

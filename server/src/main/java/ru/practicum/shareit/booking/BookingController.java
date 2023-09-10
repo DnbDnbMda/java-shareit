@@ -15,7 +15,7 @@ import java.util.List;
 
 import static ru.practicum.shareit.utils.Constants.DEFAULT_FROM_VALUE;
 import static ru.practicum.shareit.utils.Constants.DEFAULT_SIZE_VALUE;
-//mdad import static ru.practicum.shareit.utils.Constants.USER_ID_HEADER;
+import static ru.practicum.shareit.utils.Constants.USER_ID_HEADER;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,7 +27,7 @@ public class BookingController {
 
     @PostMapping
     ResponseBookingDto add(@RequestBody PostBookingDto postBookingDto,
-                           @RequestHeader("${useridheader}") int bookerId) {
+                           @RequestHeader(USER_ID_HEADER) int bookerId) {
         log.info(Messages.addBooking());
         Booking booking = bookingService.addBooking(postBookingDto, bookerId);
         return BookingMapper.toResponseBookingDto(booking);
@@ -35,7 +35,7 @@ public class BookingController {
 
     @PatchMapping("/{bookingId}")
     ResponseBookingDto approve(@PathVariable int bookingId, @RequestParam boolean approved,
-                               @RequestHeader("${useridheader}") int userId) {
+                               @RequestHeader(USER_ID_HEADER) int userId) {
         log.info(Messages.approveBooking(bookingId, userId, approved));
         Booking booking = bookingService.approve(bookingId, approved, userId);
         return BookingMapper.toResponseBookingDto(booking);
@@ -43,7 +43,7 @@ public class BookingController {
 
     @GetMapping("/{bookingId}")
     public ResponseBookingDto getById(@PathVariable int bookingId,
-                                      @RequestHeader("${useridheader}") int userId) {
+                                      @RequestHeader(USER_ID_HEADER) int userId) {
         log.info(Messages.findBooking(bookingId, userId));
         Booking booking = bookingService.getBookingForUser(bookingId, userId);
         return BookingMapper.toResponseBookingDto(booking);
@@ -51,7 +51,7 @@ public class BookingController {
 
     @GetMapping
     public Collection<ResponseBookingDto> getAllBookings(@RequestParam(value = "state", defaultValue = "ALL") BookingState state,
-                                                         @RequestHeader("${useridheader}") int userId,
+                                                         @RequestHeader(USER_ID_HEADER) int userId,
                                                          @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
                                                          int from,
                                                          @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
@@ -63,7 +63,7 @@ public class BookingController {
 
     @GetMapping("/owner")
     public Collection<ResponseBookingDto> getAllBookingForOwner(@RequestParam(value = "state", defaultValue = "ALL") BookingState state,
-                                                                @RequestHeader("${useridheader}") int ownerId,
+                                                                @RequestHeader(USER_ID_HEADER) int ownerId,
                                                                 @RequestParam(defaultValue = DEFAULT_FROM_VALUE)
                                                                 int from,
                                                                 @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)

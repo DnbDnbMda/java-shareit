@@ -12,7 +12,7 @@ import java.util.List;
 
 import static ru.practicum.shareit.utils.Constants.DEFAULT_FROM_VALUE;
 import static ru.practicum.shareit.utils.Constants.DEFAULT_SIZE_VALUE;
-//mdad import static ru.practicum.shareit.utils.Constants.USER_ID_HEADER;
+import static ru.practicum.shareit.utils.Constants.USER_ID_HEADER;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class ItemRequestController {
 
     @PostMapping
     public ResponseItemRequestDto add(@RequestBody PostItemRequestDto requestDto,
-                                      @RequestHeader("${useridheader}") int requestorId) {
+                                      @RequestHeader(USER_ID_HEADER) int requestorId) {
         log.info(Messages.addItemRequest(requestorId));
         ItemRequest request = ItemRequestMapper.toItemRequest(requestDto);
         request = itemRequestService.createItemRequest(request, requestorId);
@@ -32,7 +32,7 @@ public class ItemRequestController {
     }
 
     @GetMapping
-    public List<ResponseItemRequestDto> getAllByOwner(@RequestHeader("${useridheader}") int requestorId) {
+    public List<ResponseItemRequestDto> getAllByOwner(@RequestHeader(USER_ID_HEADER) int requestorId) {
         log.info(Messages.getItemRequestsForOwner(requestorId));
         return itemRequestService.getForOwner(requestorId);
     }
@@ -42,14 +42,14 @@ public class ItemRequestController {
                                                int from,
                                                @RequestParam(defaultValue = DEFAULT_SIZE_VALUE)
                                                int size,
-                                               @RequestHeader("${useridheader}") int userId) {
+                                               @RequestHeader(USER_ID_HEADER) int userId) {
         log.info(Messages.getAllRequestForUser(userId));
         return itemRequestService.getAll(from, size, userId);
     }
 
     @GetMapping("/{requestId}")
     public ResponseItemRequestDto getById(@PathVariable int requestId,
-                                          @RequestHeader("${useridheader}") int userId) {
+                                          @RequestHeader(USER_ID_HEADER) int userId) {
         log.info(Messages.getRequestById(requestId, userId));
         return itemRequestService.getById(requestId, userId);
     }
