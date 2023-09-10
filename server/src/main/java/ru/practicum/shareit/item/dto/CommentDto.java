@@ -2,13 +2,11 @@ package ru.practicum.shareit.item.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDto {
 
     private String text;
-
 }

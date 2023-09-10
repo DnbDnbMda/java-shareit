@@ -4,10 +4,8 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 public class PostItemDto {
 
     private int id;
@@ -15,5 +13,4 @@ public class PostItemDto {
     private String description;
     private Boolean available;
     private Integer requestId;
-
 }

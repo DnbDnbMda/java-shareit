@@ -6,11 +6,8 @@ import ru.practicum.shareit.booking.dto.BookingReferencedDto;
 import java.util.List;
 
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-@EqualsAndHashCode
-@ToString
+@Data
 public class ResponseItemDto {
 
     private int id;
@@ -21,5 +18,4 @@ public class ResponseItemDto {
     private BookingReferencedDto nextBooking;
     private List<ResponseCommentDto> comments;
     private Integer requestId;
-
 }

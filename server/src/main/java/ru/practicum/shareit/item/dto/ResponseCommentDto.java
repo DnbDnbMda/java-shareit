@@ -1,16 +1,11 @@
 package ru.practicum.shareit.item.dto;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Builder
-@EqualsAndHashCode
-@Getter
-@ToString
+@Data
 public class ResponseCommentDto {
 
     private int id;

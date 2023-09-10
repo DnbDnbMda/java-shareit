@@ -6,12 +6,10 @@ import ru.practicum.shareit.user.model.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Entity(name = "comments")
 public class Comment {
 
@@ -27,5 +25,4 @@ public class Comment {
     @JoinColumn(name = "author_id")
     private User author;
     private LocalDateTime created;
-
 }
