@@ -75,5 +75,4 @@ public class ItemController {
         log.info(Messages.addComment(itemId, userId));
         return itemClient.createComment(commentDto, itemId, userId);
     }
-
 }
