@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class CommentMapper {
 
-    public Comment toComment(CommentDto commentDto, Item item, User author, LocalDateTime created) {
+    public static Comment toComment(CommentDto commentDto, Item item, User author, LocalDateTime created) {
         Comment comment = new Comment();
         comment.setText(commentDto.getText());
         comment.setItem(item);
@@ -24,7 +24,7 @@ public class CommentMapper {
         return comment;
     }
 
-    public ResponseCommentDto toResponseCommentDto(Comment comment) {
+    public static ResponseCommentDto toResponseCommentDto(Comment comment) {
         return ResponseCommentDto.builder()
                 .id(comment.getId())
                 .text(comment.getText())
@@ -33,7 +33,7 @@ public class CommentMapper {
                 .build();
     }
 
-    public List<ResponseCommentDto> toResponseCommentDto(Collection<Comment> comments) {
+    public static List<ResponseCommentDto> toResponseCommentDto(Collection<Comment> comments) {
         if (comments == null) {
             return null;
         }
