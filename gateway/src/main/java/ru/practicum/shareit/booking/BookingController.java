@@ -69,5 +69,4 @@ public class BookingController {
         log.info(Messages.findAllBookingsForOwner(ownerId, state));
         return bookingClient.getAllBookingForOwner(ownerId, state, from, size);
     }
-
 }
