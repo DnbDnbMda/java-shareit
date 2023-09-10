@@ -4,16 +4,13 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Data
 public class PostBookingDto {
 
     private int itemId;
     private LocalDateTime start;
     private LocalDateTime end;
-
 }

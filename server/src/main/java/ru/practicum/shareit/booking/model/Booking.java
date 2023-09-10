@@ -8,13 +8,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @Entity(name = "bookings")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Booking {
 
     @Id
