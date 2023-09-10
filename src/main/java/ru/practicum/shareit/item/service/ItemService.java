@@ -1,67 +1,24 @@
 package ru.practicum.shareit.item.service;
 
-import ru.practicum.shareit.item.comment.dto.CommentDto;
-import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.item.dto.ItemWithBookingAndCommentsDto;
+import ru.practicum.shareit.item.dto.CommentDto;
+import ru.practicum.shareit.item.dto.PostItemDto;
+import ru.practicum.shareit.item.dto.ResponseCommentDto;
+import ru.practicum.shareit.item.dto.ResponseItemDto;
+import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
 
 public interface ItemService {
 
-    /**
-     * Добавить вещь в репозиторий.
-     * @param itemDto добавленная вещь.
-     * @param ownerId ID владельца вещи.
-     * @return добавленная вещь.
-     */
-    ItemDto add(ItemDto itemDto, Long ownerId);
+    Item addItem(PostItemDto postItemDto, int userId);
 
-    /**
-     * Получить список вещей пользователя с ID.
-     * @return список вещей пользователя.
-     */
-    List<ItemWithBookingAndCommentsDto> getItemsByUserId(Long ownerId);
+    Item updateItem(Item item, int ownerId);
 
-    /**
-     * Обновить вещь в БД.
-     * @param itemDto вещь.
-     * @return обновлённая вещь.
-     */
-    ItemDto updateInStorage(Long itemId, ItemDto itemDto, Long ownerId);
+    ResponseItemDto getItemForUser(int itemId, int userId);
 
-    /**
-     * Получить вещь по ID.
-     * @param itemId ID вещи.
-     * @return запрашиваемая вещь.
-     */
-    ItemDto getItemById(Long itemId);
+    List<ResponseItemDto> getAll(int userId, int from, int size);
 
-    /**
-     * Удалить вещь с ID из хранилища.
-     * @param id ID удаляемой вещи.
-     */
-    ItemDto removeItemById(Long id);
+    List<ResponseItemDto> findItemsByText(String text, int from, int size);
 
-    /**
-     * Поиск вещей по тексту.
-     * @param text текст.
-     * @return список вещей.
-     */
-    List<ItemDto> searchItemsByText(String text);
-
-    /**
-     * Теперь нужно, чтобы владелец видел даты последнего и ближайшего следующего
-     * бронирования для каждой вещи, когда просматривает вещь.
-     * @param itemId ID вещи.
-     * @param userId пользователь
-     * @return вещь с бронированиями и комментариями.
-     */
-    ItemWithBookingAndCommentsDto getItemWithBookingAndComment(Long itemId, Long userId);
-
-    /**
-     * Добавить комментарий к вещи пользователем, действительно бравшим вещь в аренду.
-     * @param bookerId ID пользователя, добавляющего комментарий.
-     * @param itemId   ID вещи, которой оставляется комментарий.
-     */
-    CommentDto saveComment(Long bookerId, Long itemId, CommentDto commentDto);
+    ResponseCommentDto createComment(CommentDto commentDto, int itemId, int userId);
 }
