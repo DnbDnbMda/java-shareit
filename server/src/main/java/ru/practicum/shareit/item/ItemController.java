@@ -54,10 +54,7 @@ public class ItemController {
     public ResponseItemDto get(@PathVariable("id") int itemId, @RequestHeader(USER_ID_HEADER) int userId) {
         log.info(Messages.getItem(itemId));
 
-
-        System.out.println("get " + itemId + "   " + userId);
         ResponseItemDto result = itemService.getItemForUser(itemId, userId);
-        System.out.println("result: " + result);
 
         return result;
     }

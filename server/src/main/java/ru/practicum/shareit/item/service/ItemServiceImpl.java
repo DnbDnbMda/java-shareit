@@ -87,14 +87,10 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Transactional(readOnly = true)
     public ResponseItemDto getItemForUser(int itemId, int userId) {
-        System.out.println("get item for user");
 
         Item item = getItem(itemId);
         List<Comment> comments = commentRepository.findByItemId(itemId);
         LocalDateTime now = LocalDateTime.now();
-
-        System.out.println("find all    " + now);
-        System.out.println(bookingRepository.findAll());
 
         Booking lastBooking = null;
         Booking nextBooking = null;
